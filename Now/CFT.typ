@@ -146,3 +146,4 @@ $
 
 It defines a cochain complex $(C^n (ZZ[G], A), partial^n)$, and the cohomology of this complex is denoted by $H^n (G, A)$.\
 ]
+
