@@ -147,3 +147,43 @@ $
 It defines a cochain complex $(C^n (ZZ[G], A), partial^n)$, and the cohomology of this complex is denoted by $H^n (G, A)$.\
 ]
 
+= 0917
+#definition[
+  A $G$-module $B$ is called relatively injective if $B$ is a direct summand of an induced module $op("Ind")_1^G (A)$ for some abelian group $A$.\
+]
+
+#corollary[
+  A relatively injective $G$-module is acyclic.
+]
+
+= Lecture 2: Change of groups
+#underline("General"): $f:G' -> G$: group homomorphism of finite groups.\
+Let $A$ be a $G$-module. Through $f$, we can make $A$ a $G'$-module. Denote as $f^* A$. This is a functor $f^*: G op("-Mod") -> G' op("-Mod")$.
+We have a natural map $f^*: H^n (G, A) -> H^n (G', f^* A)$ for all $n$.
+
+Now consider the case $H arrow.r.hook G$. The pullback map is called the restriction map.
+#theorem(caption:"Shapiro lemma")[
+$
+  H^n (H, A) tilde.equiv H^n (G, op("Ind")_H^G (A))
+$
+]
+#proof[
+  By Frobenius reciprocity, we have
+  $
+    op("Hom")_G (B, op("Ind")_H^G (A)) tilde.equiv op("Hom")_H (B, A)
+  $
+  For $n=0$: Take $B = ZZ$ with trivial action.\
+  Now for $n>0$, take a injective resolution $A -> I^bullet$. By Frobenius reciprocity and the exactness of induction functor, $op("Ind")_H^G (I^bullet)$ is an injective resolution of $op("Ind")_H^G (A)$.\
+  Applying the case $n=0$ to $I^bullet$, we get the desired isomorphism since both sides are universal $delta$-functors.
+]
+
+Consider another case $H arrow.r.hook G$ and $A$ is a $G$-module. Consider the following map:\
+For $n=0$, we have a map $H^0 (H, A|_H) -> H^0 (G, A)$ given by $a mapsto sum_(g in G slash H) g a$.\
+Now, $H^n (H, A|_H)$ is a $delta$-functor. We want to show that it's the derived functor of $A |-> A^H = H^0 (H, A|_H)$.\
+By the dual of Frobenius reciprocity,
+$
+  op("Hom")_H (- times.o_H G, I) tilde.equiv op("Hom")_G (-, I)
+$
+Since $- times.o_H G$ is exact, $I^bullet|_H$ is an injective resolution of $A|_H$. (Restriction is exact.)\
+This proves that $H^n (H, A|_H)$ is the derived functor of $A |-> A^H$ hence a universal $delta$-functor.\
+As $A |-> H^n (G,A)$ is also a $delta$-functor, we have a natural transformation $H^n (H, A|_H) -> H^n (G, A)$ for all $n$.\
