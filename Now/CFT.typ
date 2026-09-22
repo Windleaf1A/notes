@@ -187,3 +187,138 @@ $
 Since $- times.o_H G$ is exact, $I^bullet|_H$ is an injective resolution of $A|_H$. (Restriction is exact.)\
 This proves that $H^n (H, A|_H)$ is the derived functor of $A |-> A^H$ hence a universal $delta$-functor.\
 As $A |-> H^n (G,A)$ is also a $delta$-functor, we have a natural transformation $H^n (H, A|_H) -> H^n (G, A)$ for all $n$.\
+
+= 0922
+== Inflation
+Let $H lt.closed G$ be a normal subgroup.\
+Given a $G$-module $A$, we can make $A^H$ a $G slash H$-module.\
+Then we have a natural map
+$
+  op("inf")_(G slash H): H^n (G slash H, A^H) -> H^n (G, A^H) -> H^n (G, A)
+$
+#theorem[
+  We have an exact sequence
+  $
+    #diagram(
+      $
+        0 edge(->) & H^1 (G slash H, A^H) edge(->,op("inf")_(G slash H)) & H^1 (G, A) edge(->,op("res")) & H^1 (H, A)
+      $
+    ) 
+  $
+]
+
+= Intermezzo: Spectral sequences (arising from a double complex)
+*Set-up*: $M^(bullet, bullet)$: bounded below double complex of abelian groups.\
+$
+  #diagram(
+    $
+      & 0 edge(->, "d") & 0 edge(->, "d") & 0 edge(->, "d") \
+      0 edge(->) & M^(0,0) edge(->) edge(->, "d") & M^(0,1) edge(->) edge(->, "d") & M^(0,2) edge(->) edge(->, "d") \
+      0 edge(->) & M^(1,0) edge(->) edge(->, "d") & M^(1,1) edge(->) edge(->, "d") & M^(1,2) edge(->) edge(->, "d")
+    $
+  )
+$
+with 
+- $d_(arrow.r) compose d_(arrow.r) = 0$
+- $d_(arrow.b) compose d_(arrow.b) = 0$
+- $d_(arrow.r) compose d_(arrow.b) + d_(arrow.b) compose d_(arrow.r) = 0$
+
+Define the total complex $M^bullet$ by $M^n = sum_(p+q=n) M^(p,q)$ and $d = d_(arrow.r) + d_(arrow.b)$.\
+We want to compute the cohomology of $M^bullet$.\
+The strategy is to filter $M^bullet$ by $p$ and $q$ and get two spectral sequences.\
+Define $F^i M^n = sum_(p >= i) M^(p,n-p)$.\
+Then
+$
+  F^i H^n = (Z^n + F^i M^n) + B^n slash B^n subset H^n
+$
+It gives a filtration of $H^n$:
+$
+  0 subset F^n H^n subset F^(n-1) H^n subset ... subset F^0 H^n = H^n
+$
+
+
+- Page 0: $E_0^(p,q) = M^(p,q)$\
+- Page 1: $E_1^(p,q) = H^q (M^(p, bullet))$ with the differential $d_1^(p,q): E_1^(p,q) -> E_1^(p+1,q)$ induced by $d_(arrow.r)$.\
+- Page 2: $E_2^(p,q) = H^p (E_1^(bullet, q))$ with the differential $d_2^(p,q): E_2^(p,q) -> E_2^(p+2,q-1)$ induced by $d_(arrow.b)$.\
+#eye[
+  The map is given by:\
+  For $[x] in E_2^(p,q)$, we have $x in M^(p,q)$ s.t. $d_(arrow.r) x = 0$ and $d_(arrow.b) x = d_(arrow.r) (-y)$, for some $y in M^(p+1,q-1)$. Then $d_2^(p,q)([x]) = d_1^(p+1,q-1)([y])$.
+]
+Inductively, we can define
+$
+  E_r^(p,q) = op("ker")(d_r^(p,q)) slash op("im")(d_r^(p-r,q+r-1))
+$
+and
+$
+  d_r^(p,q): E_r^(p,q) -> E_r^(p+r,q-r+1)
+$
+For a fixed $(p,q)$, the sequence $E_r^(p,q)$ stabilizes for $r$ large enough. Denote the stable value by $E_oo^(p,q)$.\
+If for some $x in M^(p,q)$, we have $d_arrow.r x = 0$ and $d_arrow.b x = 0$, i.e. $d x = 0$. Then $d_n (x) = 0$ for all $n$, so $[x] in E_oo^(p,q)$.\
+Similarly, if $x in M^(p,q), y in M^(p+1,q-1)$ and $d(x+y) = 0$, then $[x+y] in E_oo^(p,q)$.\
+In fact,
+$
+  E_oo^(p,q) = (Z^n inter F^p M^(p+q)) / (Z^n inter F^(p+1) M^(p+q) + B^n inter F^p M^(p+q))
+$
+which is exactly the $p$-th graded piece of the filtration of $H^n$ i.e. $(F^p H^n) / (F^(p+1) H^n)$.
+
+Now, for lower degree terms, we have
+- $F^1 H^1 = E_oo^(1,0)$
+- $H^1 slash F^1 H^1 = E_oo^(0,1)$
+- $F^2 H^2 = E_oo^(2,0)$
+i.e.
+$
+  #diagram(
+    $
+      0 edge(->) & E_oo^(1,0) edge(->) & H^1 edge(->) & E_oo^(0,1) edge(->) & 0
+    $
+  )
+$
+We have $E_oo^(1,0) = E_2^(1,0)$ and $E_oo^(0,1) = ker (d_2^(0,1))$.\
+Also, $E_oo^(2,0) = op("coker")(d_2^(0,1))$.\
+So we have an exact sequence
+$
+  #diagram(
+    $
+      0 edge(->) & E_2^(1,0) edge(->) & H^1 edge(->) & E_2^(0,1) edge(->, op(d_2)) & E_2^(2,0) edge(->) & H^2
+    $
+  )
+$
+#theorem(caption:"Grothendieck spectral sequence")[
+  Let $cal(A), cal(B), cal(C)$ be three abelian categories.\
+  $F: cal(A) -> cal(B)$ and $G: cal(B) -> cal(C)$ be two additive left-exact functors.\
+  Assume that
+  - $cal(A), cal(B)$ have enough injectives.
+  - $F$ sends injective objects of $cal(A)$ to $G$-acyclic objects of $cal(B)$.
+Then
+$
+  E_2^(p,q) = (R^p G)(R^q F)(A) ==> R^(p+q) (G compose F)(A)
+$
+]
+For $A in cal(A)$, take an injective resolution $A -> I^bullet$.\
+Then $F(I^bullet)$ is a acyclic complex in $cal(B)$.\
+#fact[
+  There is a double complex $J^(p,q)$ s.t. $J^(p,bullet)$ is an injective resolution of $F(I^p)$ for all $p$.
+]
+
+#example[
+  - $cal(A) = "Mod"_G, cal(B) = "Mod"_(G slash H), cal(C) = "Ab"$.\
+  - $F(A) = A^H, G(B) = B^(G slash H)$.\
+  Then $R^p G = H^p (G slash H, -)$, $R^q F = H^q (H, -)$, and $R^(p+q) (G compose F) = H^(p+q) (G, -)$.\
+  So we have a spectral sequence
+  $
+    #diagram(
+      $
+        0 edge(->) & E_2^(1,0) edge(->) & H^1 edge(->) & E_2^(0,1) edge(->, op(d_2)) & E_2^(2,0) edge(->) & H^2
+      $
+    )
+  $
+  which can be rewritten as
+  $
+    #diagram(
+      spacing: 0.7cm, 
+      $
+        0 edge(->) & H^1 (G slash H, A^H) edge(->, op("inf")_(G slash H)) & H^1 (G, A) edge(->, op("res")) & H^1 (H, A)^(G slash H) edge(->, op(d_2)) & H^2 (G slash H, A^H) edge(->) & H^2 (G, A)
+      $
+    )
+  $
+]
