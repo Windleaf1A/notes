@@ -138,7 +138,7 @@ Let $G$ be a finite group.\
 ]
 
 #definition[
-$C^n (ZZ[G], A) = op("Hom")(ZZ[G^(n+1)], A)$.\
+$C^n (ZZ[G], A) = op("Hom")_G(ZZ[G^(n+1)], A)$.\
 $partial^n: C^n (ZZ[G], A) -> C^(n+1) (ZZ[G], A)$ is defined by
 $
   (partial^n f)(g_0, ..., g_(n+1)) = sum_(i=0)^(n+1) (-1)^i f(g_0, ..., hat(g_i), ..., g_(n+1))
@@ -242,7 +242,7 @@ $
 - Page 2: $E_2^(p,q) = H^p (E_1^(bullet, q))$ with the differential $d_2^(p,q): E_2^(p,q) -> E_2^(p+2,q-1)$ induced by $d_(arrow.b)$:\
 #eye[
   The map is given by:\
-  For $[x] in E_2^(p,q)$, we have $x in M^(p,q)$ s.t. $d_(arrow.r) x = 0$ and $d_(arrow.b) x = d_(arrow.r) (-y)$, for some $y in M^(p+1,q-1)$. Then $d_2^(p,q)([x]) = [d_1^(p+1,q-1)(y)]$.
+  For $[x] in E_2^(p,q)$, we have $x in M^(p,q)$ s.t. $d_(arrow.r) x = 0$ and $d_(arrow.b) x = d_(arrow.r) (-y)$, for some $y in M^(p+1,q-1)$. Then $d_2^(p,q)([x]) = [d_(arrow.b)^(p+1,q-1)(y)]$.
 ]
 Inductively, we can define
 $
@@ -464,7 +464,7 @@ where $N_G$ is the norm map and $I_G$ is the augmentation ideal.
 ]
 
 #proof[
-We have the following exact sequences of $G$-modules:
+We have the following exact sequences of abelian groups:
 $
   #diagram(
     $
@@ -477,7 +477,7 @@ by the snake lemma, we get the desired long exact sequence of Tate cohomology gr
 ]
 
 Similar to the case of group cohomology, we have the following results:\
-The group coholomogy can be computed by applying the functor $op("Hom")(-, A)$ to the exact sequence
+The group coholomogy can be computed by applying the functor $op("Hom")_G(-, A)$ to the exact sequence
 $
   #diagram(
     $
@@ -487,7 +487,7 @@ $
 $
 and compute the cohomology of the resulting complex.\
 For the group homology, we can apply the functor $- times.o_(ZZ[G]) A$ to the same exact sequence and compute the homology of the resulting complex.\
-But for $G$ finite, we have an isomorphism between $ZZ[G^n] times.o_(ZZ[G]) A$ and $op("Hom")(ZZ[G^n], A)$. So we can compute the Tate cohomology by applying the functor $op("Hom")(-, A)$ to the exact sequence
+But for $G$ finite, we have an isomorphism between $ZZ[G^n] times.o_(ZZ[G]) A$ and $op("Hom")_G(ZZ[G^n], A)$. So we can compute the Tate cohomology by applying the functor $op("Hom")(-, A)$ to the exact sequence
 $
   #diagram(
     $
@@ -497,7 +497,7 @@ $
 $
 where the boundary map is given by 
 $
-  d_n (g_1, ..., g_n) = sum_(g in G) sum_(i=0)^n (-1)^i (g_1,..., g_(i-1), g, g_i, ..., g_n)
+  partial_n (g_1, ..., g_n) = sum_(g in G) sum_(i=0)^n (-1)^i (g_1,..., g_(i-1), g, g_i, ..., g_n)
 $
 combining the two complexes, it is
 $
@@ -508,12 +508,13 @@ $
     $
   )
 $
+and the map $ZZ[G] -> ZZ[G]$ is given by the composition $ZZ[G] -> ZZ -> ZZ[G]$, which is exactly the norm map.
 
 We can similarly define restriction and corestriction maps for Tate cohomology.\
 We first define them for homology. Let $H <= G$ be a subgroup of finite index.\
 Note that both $H_n (G,A)$ and $H_n (H,A|_H)$ are universal $delta$-functors. So we only need to define the map for $n=0$.(need to check restriction map $A -> A|_H$ preserves projectivity and exactness)\
 - Corestriction: $A_H -> A_G$ is given by $a + I_H A mapsto a + I_G A$.\
-- Restriction: $A_H -> A_G$ is given by $a + I_G A mapsto sum_(g in H backslash G) g a + I_H A$. (check well-defined)\
+- Restriction: $A_G -> A_H$ is given by $a + I_G A mapsto sum_(g in H backslash G) g a + I_H A$. (check well-defined)\
 
 For Tate cohomology, we only need to show that the restriction and corestriction maps are compatible with the norm map, and the result comes from the snake lemma.\
 We can check it by direct computation.\
@@ -532,6 +533,6 @@ We can check it by direct computation.\
     $
       op("cor")_G^H compose op("res")_G^H = [G:H] id_(hat(H)^n (G, A))
     $
-  - $hat(H)^n (G,A)$ is of $[G:H]$-torsion.
+  - $hat(H)^n (G,A)$ is of $|G|$-torsion.
   - If $A$ is of finite type, then $hat(H)^n (G,A)$ is finite.
 ]
