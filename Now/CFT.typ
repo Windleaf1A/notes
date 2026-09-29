@@ -138,7 +138,7 @@ Let $G$ be a finite group.\
 ]
 
 #definition[
-$C^n (ZZ[G], A) = op("Hom")(ZZ[G]^(n+1), A)$.\
+$C^n (ZZ[G], A) = op("Hom")(ZZ[G^(n+1)], A)$.\
 $partial^n: C^n (ZZ[G], A) -> C^(n+1) (ZZ[G], A)$ is defined by
 $
   (partial^n f)(g_0, ..., g_(n+1)) = sum_(i=0)^(n+1) (-1)^i f(g_0, ..., hat(g_i), ..., g_(n+1))
@@ -229,7 +229,7 @@ The strategy is to filter $M^bullet$ by $p$ and $q$ and get two spectral sequenc
 Define $F^i M^n = sum_(p >= i) M^(p,n-p)$.\
 Then
 $
-  F^i H^n = (Z^n + F^i M^n) + B^n slash B^n subset H^n
+  F^i H^n = (Z^n inter F^i M^n) + B^n slash B^n subset H^n
 $
 It gives a filtration of $H^n$:
 $
@@ -238,15 +238,15 @@ $
 
 
 - Page 0: $E_0^(p,q) = M^(p,q)$\
-- Page 1: $E_1^(p,q) = H^q (M^(p, bullet))$ with the differential $d_1^(p,q): E_1^(p,q) -> E_1^(p+1,q)$ induced by $d_(arrow.r)$.\
-- Page 2: $E_2^(p,q) = H^p (E_1^(bullet, q))$ with the differential $d_2^(p,q): E_2^(p,q) -> E_2^(p+2,q-1)$ induced by $d_(arrow.b)$.\
+- Page 1: $E_1^(p,q) = H^q (M^(p, bullet))$ with the differential $d_1^(p,q): E_1^(p,q) -> E_1^(p+1,q)$ induced by $d_(arrow.b)$.\
+- Page 2: $E_2^(p,q) = H^p (E_1^(bullet, q))$ with the differential $d_2^(p,q): E_2^(p,q) -> E_2^(p+2,q-1)$ induced by $d_(arrow.b)$:\
 #eye[
   The map is given by:\
-  For $[x] in E_2^(p,q)$, we have $x in M^(p,q)$ s.t. $d_(arrow.r) x = 0$ and $d_(arrow.b) x = d_(arrow.r) (-y)$, for some $y in M^(p+1,q-1)$. Then $d_2^(p,q)([x]) = d_1^(p+1,q-1)([y])$.
+  For $[x] in E_2^(p,q)$, we have $x in M^(p,q)$ s.t. $d_(arrow.r) x = 0$ and $d_(arrow.b) x = d_(arrow.r) (-y)$, for some $y in M^(p+1,q-1)$. Then $d_2^(p,q)([x]) = [d_1^(p+1,q-1)(y)]$.
 ]
 Inductively, we can define
 $
-  E_r^(p,q) = op("ker")(d_r^(p,q)) slash op("im")(d_r^(p-r,q+r-1))
+  E_(r+1)^(p,q) = op("ker")(d_r^(p,q)) slash op("im")(d_r^(p-r,q+r-1))
 $
 and
 $
@@ -295,7 +295,7 @@ $
 $
 ]
 For $A in cal(A)$, take an injective resolution $A -> I^bullet$.\
-Then $F(I^bullet)$ is a acyclic complex in $cal(B)$.\
+Then $F(I^bullet)$ is a complex in $cal(B)$ of acyclic objects.\
 #fact[
   There is a double complex $J^(p,q)$ s.t. $J^(p,bullet)$ is an injective resolution of $F(I^p)$ for all $p$.
 ]
@@ -436,4 +436,102 @@ So we can define its left derived functor, denote by $H_n (G,A)$.
   Also, since $I_G slash I_G^2$ is abelian, the map factors through $G^"ab"$.\
   Now consider the map $I_G -> G^"ab"$ given by $g-1 -> g$.\
   It is surjective and factors through $I_G slash I_G^2$.\
+]
+
+== 0929
+#definition(caption:"Tate cohomology")[
+Let $G$ be a finite group and $A$ be a $G$-module. The Tate cohomology groups $hat(H)^n (G,A)$ are defined as follows:
+- For $n>0$, $hat(H)^n (G,A) = H^n (G,A)$.
+- For $n=0$, $hat(H)^0 (G,A) = A^G slash N_G (A)$.
+- For $n=-1$, $hat(H)^(-1) (G,A) = ker (N_G) slash I_G A$.
+- For $n< -1$, $hat(H)^n (G,A) = H_(-n-1) (G,A)$.
+
+where $N_G$ is the norm map and $I_G$ is the augmentation ideal.
+]
+
+#theorem[
+  Let $0 -> A -> B -> C -> 0$ be a short exact sequence of $G$-modules. Then we have a long exact sequence of Tate cohomology groups
+  $
+    #diagram(
+      $
+        ... edge(->, delta) & hat(H)^(-2) (G, A) edge(->) & hat(H)^(-2) (G, B) edge(->) & hat(H)^(-2) (G, C) edge(->, "llb", delta)\
+         & hat(H)^(-1) (G, A) edge(->) & hat(H)^(-1) (G, B) edge(->) & hat(H)^(-1) (G, C) edge(->, "llb", delta)\ 
+         & hat(H)^0 (G, A) edge(->) & hat(H)^0 (G, B) edge(->) & hat(H)^0 (G, C) edge(->, "llb", delta)\
+         & hat(H)^1 (G, A) edge(->) & hat(H)^1 (G, B) edge(->) & hat(H)^1 (G, C) edge(->, delta) & ...
+             $
+    )
+  $
+]
+
+#proof[
+We have the following exact sequences of $G$-modules:
+$
+  #diagram(
+    $
+      H_1 (G,C) edge(->, delta) & A_G edge(->) edge(->,"b", N) & B_G edge(->) edge(->,"b", N) & C_G edge(->) edge(->, "b", N) & 0 \
+      0 edge(->) & A^G edge(->) & B^G edge(->) & C^G edge(->, delta) & H^1 (G,A)
+    $
+  )
+$
+by the snake lemma, we get the desired long exact sequence of Tate cohomology groups.
+]
+
+Similar to the case of group cohomology, we have the following results:\
+The group coholomogy can be computed by applying the functor $op("Hom")(-, A)$ to the exact sequence
+$
+  #diagram(
+    $
+      ... edge(->) & ZZ[G^2] edge(->) & ZZ[G] edge(->) & ZZ edge(->) & 0
+    $
+  )
+$
+and compute the cohomology of the resulting complex.\
+For the group homology, we can apply the functor $- times.o_(ZZ[G]) A$ to the same exact sequence and compute the homology of the resulting complex.\
+But for $G$ finite, we have an isomorphism between $ZZ[G^n] times.o_(ZZ[G]) A$ and $op("Hom")(ZZ[G^n], A)$. So we can compute the Tate cohomology by applying the functor $op("Hom")(-, A)$ to the exact sequence
+$
+  #diagram(
+    $
+      0 edge(->) & ZZ edge(->) & ZZ[G] edge(->) & ZZ[G^2] edge(->) & ... 
+    $
+  )
+$
+where the boundary map is given by 
+$
+  d_n (g_1, ..., g_n) = sum_(g in G) sum_(i=0)^n (-1)^i (g_1,..., g_(i-1), g, g_i, ..., g_n)
+$
+combining the two complexes, it is
+$
+  #diagram(
+    $
+      ... edge(->) & ZZ[G^2] edge(->) & ZZ[G] edge(->, "llb") \
+      ZZ[G] edge(->) & ZZ[G^2] edge(->) & ...
+    $
+  )
+$
+
+We can similarly define restriction and corestriction maps for Tate cohomology.\
+We first define them for homology. Let $H <= G$ be a subgroup of finite index.\
+Note that both $H_n (G,A)$ and $H_n (H,A|_H)$ are universal $delta$-functors. So we only need to define the map for $n=0$.(need to check restriction map $A -> A|_H$ preserves projectivity and exactness)\
+- Corestriction: $A_H -> A_G$ is given by $a + I_H A mapsto a + I_G A$.\
+- Restriction: $A_H -> A_G$ is given by $a + I_G A mapsto sum_(g in H backslash G) g a + I_H A$. (check well-defined)\
+
+For Tate cohomology, we only need to show that the restriction and corestriction maps are compatible with the norm map, and the result comes from the snake lemma.\
+We can check it by direct computation.\
+
+#theorem[
+  If $I$ is a relatively injective $G$-module, then $hat(H)^n (G, I) = 0$ for all $n in ZZ$.
+]
+#proof[
+  Already know for $n>0$. For $n<-1$, since for $G$ finite, induced modules are isomorphic to coinduced modules, we have $I$ is also relatively projective. So $hat(H)^n (G, I) = 0$ for $n<-1$.\
+  For $n=0,-1$, it can be checked by direct computation for induced modules.
+]
+
+#theorem(caption:"restriction-corestriction")[
+  Let $H <= G$ be a subgroup of finite index. Then
+  -
+    $
+      op("cor")_G^H compose op("res")_G^H = [G:H] id_(hat(H)^n (G, A))
+    $
+  - $hat(H)^n (G,A)$ is of $[G:H]$-torsion.
+  - If $A$ is of finite type, then $hat(H)^n (G,A)$ is finite.
 ]
