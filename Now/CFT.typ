@@ -487,7 +487,7 @@ $
 $
 and compute the cohomology of the resulting complex.\
 For the group homology, we can apply the functor $- times.o_(ZZ[G]) A$ to the same exact sequence and compute the homology of the resulting complex.\
-But for $G$ finite, we have an isomorphism between $ZZ[G^n] times.o_(ZZ[G]) A$ and $op("Hom")_G(ZZ[G^n], A)$. So we can compute the Tate cohomology by applying the functor $op("Hom")(-, A)$ to the exact sequence
+But for $G$ finite, we have an isomorphism between $ZZ[G^n] times.o_(ZZ[G]) A$ and $op("Hom")_G(ZZ[G^n], A)$. So we can compute the Tate cohomology by applying the functor $op("Hom")_G(-, A)$ to the exact sequence
 $
   #diagram(
     $
@@ -603,8 +603,16 @@ where $R$ is a set of representatives of $H backslash G$ and for each $r in R$, 
         $
       )
     $
-    be a exact sequence of $G$-modules.\
-    Suppose that we have a pairing $A times B -> C$, which induces pairings $A' times B -> C$ and $A'' times B -> C$.\
+    and
+    $
+      #diagram(
+        $
+          0 edge(->) & C' edge(->) & C edge(->) & C'' edge(->) & 0
+        $
+      )
+    $
+    be exact sequences of $G$-modules.\
+    Suppose that we have pairings $A times B -> C$, $A' times B -> C'$ and $A'' times B -> C''$ which are compatible with the exact sequences.\
     Then
     $
       (delta a'') smile b = delta (a'' smile b)
@@ -636,7 +644,7 @@ where $R$ is a set of representatives of $H backslash G$ and for each $r in R$, 
 ]
 #proof[
   Use Leibniz rule and chase the diagram of the snake lemma:\
-  Let $alpha$ be a lifting of $a$. Then $delta a'' = [d alpha]$ and $delta (a'' smile b) = [d (alpha smile b)]$.\
+  Let $alpha$ be a lifting of $a''$. Then $delta a'' = [d alpha]$ and $delta (a'' smile b) = [d (alpha smile b)]$.\
   Use Leibniz rule, we have $d (alpha smile b) = d alpha smile b + (-1)^p alpha smile d b = d alpha smile b$.\
   For the second part, let $beta$ be a lifting of $b''$. Then $delta b'' = [d beta]$ and $delta (a smile b'') = [d (a smile beta)]$.\
   Use Leibniz rule, we have $d (a smile beta) = d a smile beta + (-1)^p a smile d beta = (-1)^p a smile d beta$.
