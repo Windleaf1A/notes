@@ -536,3 +536,108 @@ We can check it by direct computation.\
   - $hat(H)^n (G,A)$ is of $|G|$-torsion.
   - If $A$ is of finite type, then $hat(H)^n (G,A)$ is finite.
 ]
+
+Now, we know that $H_1 (G, ZZ)$ (or $hat(H)^(-2) (G,ZZ)$) is the abelianization.\
+What is the restriction map $op("res")_G^H: H_1 (G, ZZ) -> H_1 (H, ZZ)$?\
+This problem is important because the abelianization of the Galois group is related to the maximal abelian subextension.\
+This map is called the transfer map.\
+
+$
+  #diagram(
+    $
+      0 edge(->) & H_1 (G, ZZ) edge(->) edge(->,"b",op("res")) & H_0 (G, I_G) edge(->) edge(->,"b",op("res")) & 0\
+      0 edge(->) & H_1 (H, ZZ) edge(->) & H_0 (H, I_G) edge(->) & H_0 (H, ZZ[G])\
+      0 edge(->) & H_1 (H, ZZ) edge(->) edge(->,"t") & H_0 (H, I_H) edge(->) edge(->,"t") & 0
+    $
+  )
+$
+So we know that the transfer map is given by $H_0 (G, I_G) -> H_0 (H, I_H)$, which is given by $H_0 (G, I_G) -> H_0 (H, I_G)$ and restrict on the image of the injection $H_0 (H, I_H) -> H_0 (H, I_G)$.\
+As $H_0 (H, I_G) = I_G slash I_H I_G$ and the map $H_0 (H, I_H) -> H_0 (H, I_G)$ is given by $a + I_H^2 |-> a + I_H I_G$, we know that 
+$
+  I_H slash I_H^2 overset(tilde, ->) (I_H + I_H I_G) slash I_H I_G
+$
+Also, the restriction map $H_0 (G, I_G) -> H_0 (H, I_G)$ is the norm map
+$
+  N_(H backslash G): I_G slash I_G^2 & -> I_G slash I_H I_G \
+x + I_G^2 & |-> sum_(g in H backslash G) g x + I_H I_G
+$
+Now, for $x in G slash [G,G]$, it corresponds to $x-1 in I_G slash I_G^2$. 
+$
+  N_(H backslash G)(x-1 + I_G^2) = sum_(g in H backslash G) g (x-1) + I_H I_G = sum_(g in H backslash G) (g x - g) + I_H I_G
+$
+Take $R$ be a set of representatives of $H backslash G$.\
+For each $r in R$, there is a unique $h_r in H$ and $r' in R$ s.t. $r x = h_r r'$.\
+Moreover, $r |-> r'$ is a permutation of $R$. So we have
+$
+  &= sum_(r in R) (h_r r' - r) + I_H I_G\
+  &= sum_(r in R) (h_r r' - r') + I_H I_G\
+  &= sum_(r in R) (h_r - 1) + I_H I_G\
+$
+which corresponds to $product_(r in R) h_r in H slash [H,H]$.\
+So we have the following theorem:
+#theorem[
+The restriction map $op("res")_G^H: H_1 (G, ZZ) -> H_1 (H, ZZ)$ is given by
+$
+  x in G slash [G,G] mapsto product_(r in R) h_r in H slash [H,H]
+$
+where $R$ is a set of representatives of $H backslash G$ and for each $r in R$, there is a unique $h_r in H$ and $r' in R$ s.t. $r x = h_r r'$.
+]
+
+#definition[
+  Let $A times B -> C$ be a pairing of $G$-modules. It induces a pairing
+  $
+    C^i (G, A) times C^j (G, B) -> C^(i+j) (G, C)
+  $
+  given by
+  $
+    (f smile g)(g_0\, ...\, g_(i+j)) = angles(f(g_0\, ...\, g_i)\, g(g_i\, ...\, g_(i+j)))
+  $
+]
+#proposition[
+  Let $A,B,C$ be 3 $G$-modules.
+  + Suppose
+    $
+      #diagram(
+        $
+          0 edge(->) & A' edge(->) & A edge(->) & A'' edge(->) & 0
+        $
+      )
+    $
+    be a exact sequence of $G$-modules.\
+    Suppose that we have a pairing $A times B -> C$, which induces pairings $A' times B -> C$ and $A'' times B -> C$.\
+    Then
+    $
+      (delta a'') smile b = delta (a'' smile b)
+    $
+    where $a''$ is a cocycle in $A''$ and $b$ is a cocycle in $B$.
+ + Suppose
+  $
+    #diagram(
+        $
+          0 edge(->) & B' edge(->) & B edge(->) & B'' edge(->) & 0
+        $
+      )
+    $
+    and
+  $
+    #diagram(
+      $
+        0 edge(->) & C' edge(->) & C edge(->) & C'' edge(->) & 0
+      $
+    )
+  $
+  be exact sequences of $G$-modules.\
+  Suppose that we have three pairings $A times B -> C$, $A times B' -> C'$ and $A times B'' -> C''$ which are compatible with the exact sequences.\
+  Then
+  $
+    a smile (delta b'') = (-1)^p delta (a smile b'')
+  $
+  where $p$ is the degree of $a$.
+]
+#proof[
+  Use Leibniz rule and chase the diagram of the snake lemma:\
+  Let $alpha$ be a lifting of $a$. Then $delta a'' = [d alpha]$ and $delta (a'' smile b) = [d (alpha smile b)]$.\
+  Use Leibniz rule, we have $d (alpha smile b) = d alpha smile b + (-1)^p alpha smile d b = d alpha smile b$.\
+  For the second part, let $beta$ be a lifting of $b''$. Then $delta b'' = [d beta]$ and $delta (a smile b'') = [d (a smile beta)]$.\
+  Use Leibniz rule, we have $d (a smile beta) = d a smile beta + (-1)^p a smile d beta = (-1)^p a smile d beta$.
+]
