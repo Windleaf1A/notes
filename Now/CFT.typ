@@ -649,3 +649,115 @@ where $R$ is a set of representatives of $H backslash G$ and for each $r in R$, 
   For the second part, let $beta$ be a lifting of $b''$. Then $delta b'' = [d beta]$ and $delta (a smile b'') = [d (a smile beta)]$.\
   Use Leibniz rule, we have $d (a smile beta) = d a smile beta + (-1)^p a smile d beta = (-1)^p a smile d beta$.
 ]
+
+== 1006
+#theorem[
+  Let $G$ be a finite group. Then there is a unique family of pairings
+  $
+    hat(H)^p (G, A) times hat(H)^q (G, B) -> hat(H)^(p+q) (G, C)
+  $
+  associate to all $p,q in ZZ$ and any pairing $A times B -> C$ of $G$-modules, satisfying:
+  - $p=q=0$, the map are induced by the pairing $A^G times B^G -> C^G$ given by the restriction of the pairing $A times B -> C$.
+  - These maps are functorial in the category of $G$-modules.
+  - These maps are compatible with connecting homomorphisms in the sense of the previous proposition.
+]
+
+#proof[
+  We want to define the pairing on the level of cochains.\
+  We know that the Tate cohomology can be computed by the cochain complex
+  $
+    #diagram(
+      $
+        X_bullet: ... edge(->) & ZZ[G^2] edge(->) & ZZ[G] edge(->, "llb") \
+        ZZ[G] edge(->) & ZZ[G^2] edge(->) & ...
+      $
+    )
+  $
+  apply the functor $op("Hom")_G(-, A)$ to the complex, we get a cochain complex computing $hat(H)^n (G,A)$.\
+  We want to construct $phi_(p,q) : X_(p+q) -> X_p times.o_ZZ X_q$ satisfying the following conditions:
+  - Leibniz rule: $phi_(p,q) compose partial_(p+q+1) = (partial_(p+1) times.o op("id")) compose phi_(p+1,q) + (-1)^p (op("id") times.o partial_q) compose phi_(p, q+1)$
+  - For $p = q = 0$, $pi: ZZ[G] -> ZZ$, $(pi times.o pi) compose phi_(0,0) = pi$.
+
+Assume that we have constructed all $phi_(p,q)$, then we can complete the proof by the similar argument as the previous proposition.\
+
+We can construct $phi_(p,q)$ like this:
+- $p,q >= 0$: 
+  $
+    phi_(p,q) (g_1, ..., g_(p+q)) = (g_1, ..., g_p) times.o (g_(p+1), ..., g_(p+q))
+  $
+- $p, q >= 1$:
+  $
+    phi_(-p,-q) (g_1, ..., g_(p+q)) = (g_1, ..., g_(p)) times.o (g_(p+1), ..., g_(p+q))
+  $  
+- $p >=0, q >= 1$:
+  $
+    phi_(p,-p-q) (g_1, ..., g_q) = sum_((h_1,...,h_p) in G^p) (g_1, h_1, ..., h_p) times.o (h_p,...,h_1,g_1, ..., g_q)
+  $
+Other cases are defined in the textbook. It is a long but straightforward computation to check the Leibniz rule and the condition for $p=q=0$.
+]
+
+#proposition[
++ If we identify $(A times.o B) times.o C$ with $A times.o (B times.o C)$, then for any $alpha in hat(H)^* (G,A), beta in hat(H)^* (G,B), gamma in hat(H)^* (G,C)$, we have:
+  $
+    (alpha smile beta) smile gamma = alpha smile (beta smile gamma)
+  $
++ If we identify $A times.o B$ with $B times.o A$, then for any $alpha in hat(H)^p (G,A), beta in hat(H)^q (G,B)$, we have
+  $
+    alpha smile beta = (-1)^(p q) beta smile alpha
+  $
++ If $H <= G$ is a subgroup, then restriction is compatible with the cup product, i.e. for any $alpha in hat(H)^* (G,A), beta in hat(H)^* (G,B)$, we have
+  $
+    op("res")_G^H (alpha smile beta) = op("res")_G^H (alpha) smile op("res")_G^H (beta)
+  $
++ If $H lt.closed G$, then the inflation map is compatible with the cup product, i.e. for any $alpha in hat(H)^* (G slash H,A^H), beta in hat(H)^* (G slash H,B^H)$, we have
+  $
+    op("inf")_(G slash H) (alpha smile beta) = op("inf")_(G slash H) (alpha) smile op("inf")_(G slash H) (beta)
+  $
++ If $H$ is a subgroup of $G$, then the corestriction map is compatible with the cup product and the restriction map, i.e. for any $alpha in hat(H)^* (G,A), beta in hat(H)^* (G,B)$, we have
+  $
+    op("cor") (alpha smile op("res") (beta)) = op("cor") (alpha) smile beta
+  $
+]
+#proof[
+  The key idea is using dimension shifting to reduce to the case of $p=q=0$.\
+  We only prove 2. and 5.\
+  For 2., if $p>0$, consider the exact sequence of $G$-modules
+  $
+    #diagram(
+      $
+        0 edge(->) & A edge(->) & I(A) edge(->) & A_1 edge(->) & 0
+      $
+    )
+  $
+  Then we may take $alpha = delta alpha_1$ and $delta$ is an isomorphism.\
+  Here we need to show that the above short exact sequence splits as a sequence of abelian groups to show that
+  $
+    #diagram(
+      $
+        0 edge(->) & A times.o B edge(->) & I(A) times.o B edge(->) & A_1 times.o B edge(->) & 0
+      $
+    )
+  $
+  is exact.\
+  Here we can identify $I(A)$ with $ZZ[G] times.o A$. Then
+  $
+    #diagram(
+      $
+        0 edge(->) & ZZ edge(->) & ZZ[G] edge(->) & I_G edge(->) & 0
+      $
+    )
+  $
+  splits as a sequence of abelian groups. Tensoring with $A$ we get the desired splitting.\
+  Use induction hypothesis we have $alpha smile beta = delta alpha_1 smile beta = delta (alpha_1 smile beta) = delta ((-1)^((p-1)q) beta smile alpha_1) = (-1)^((p-1)q) (-1)^q beta smile delta alpha_1 = (-1)^(p q) beta smile alpha$.\
+  If $p<0$, consider the exact sequence of $G$-modules
+  $
+    #diagram(
+      $
+        0 edge(->) & A_1 edge(->) & I(A) edge(->) & A edge(->) & 0
+      $
+    )
+  $
+  and use the same argument as above.\
+  Do the same for $q$ and we reduce to the case of $p=q=0$ and it is true by the construction of the cup product.\
+  For 5., it is similar. We need to show that restriction and corestriction maps are compatible with the connecting homomorphisms.\
+]
