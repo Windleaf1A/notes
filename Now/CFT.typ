@@ -683,7 +683,7 @@ Assume that we have constructed all $phi_(p,q)$, then we can complete the proof 
 We can construct $phi_(p,q)$ like this:
 - $p,q >= 0$: 
   $
-    phi_(p,q) (g_1, ..., g_(p+q)) = (g_1, ..., g_p) times.o (g_(p+1), ..., g_(p+q))
+    phi_(p,q) (g_0, ..., g_(p+q)) = (g_0, ..., g_p) times.o (g_(p), ..., g_(p+q))
   $
 - $p, q >= 1$:
   $
@@ -713,7 +713,7 @@ Other cases are defined in the textbook. It is a long but straightforward comput
   $
     op("inf")_(G slash H) (alpha smile beta) = op("inf")_(G slash H) (alpha) smile op("inf")_(G slash H) (beta)
   $
-+ If $H$ is a subgroup of $G$, then the corestriction map is compatible with the cup product and the restriction map, i.e. for any $alpha in hat(H)^* (G,A), beta in hat(H)^* (G,B)$, we have
++ If $H$ is a subgroup of $G$, then the corestriction map is compatible with the cup product and the restriction map, i.e. for any $alpha in hat(H)^* (H,A), beta in hat(H)^* (G,B)$, we have
   $
     op("cor") (alpha smile op("res") (beta)) = op("cor") (alpha) smile beta
   $
