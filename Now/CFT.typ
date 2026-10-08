@@ -761,3 +761,92 @@ Other cases are defined in the textbook. It is a long but straightforward comput
   Do the same for $q$ and we reduce to the case of $p=q=0$ and it is true by the construction of the cup product.\
   For 5., it is similar. We need to show that restriction and corestriction maps are compatible with the connecting homomorphisms.\
 ]
+
+== 1008
+#remark[
+  There are two important short exact sequences of $G$-modules: (which split as a sequence of abelian groups)
+  $
+    #diagram(
+      $
+        0 edge(->) & ZZ edge(->) & ZZ[G] edge(->) & J_G edge(->) & 0
+      $
+    )
+    \
+    #diagram(
+      $
+        0 edge(->) & I_G edge(->) & ZZ[G] edge(->) & ZZ edge(->) & 0
+      $
+    )
+  $
+]
+#example[
+  $G = ZZ slash m ZZ$ with generator $sigma$.\
+  Then we have a exact sequence of $G$-modules:
+  $
+    #diagram(
+      $
+        0 edge(->) & ZZ edge(->, op("norm")) & ZZ[G] edge(->, sigma - 1) & ZZ[G] edge(->, op("aug")) & ZZ edge(->) & 0
+      $
+    )
+  $
+  So we have $Theta_ZZ: hat(H)^q (G,ZZ) tilde.equiv hat(H)^(q+2) (G, ZZ)$.\
+  Similarly, tensoring above exact sequence (which splits as a sequence of abelian groups) with $A$, note that $I_G times.o A = I_G (A)$, which has vanishing Tate cohomology, we have $Theta_A: hat(H)^q (G,A) tilde.equiv hat(H)^(q+2) (G, A)$ for any $G$-module $A$.\
+
+  Now, we have $hat(H)^0 (G,ZZ) = ZZ slash m ZZ$. Using the isomorphism between $hat(H)^0 (G,ZZ)$ and $hat(H)^2 (G,ZZ)$, there is an element $a in hat(H)^2 (G,ZZ)$ corresponding to $1 in ZZ slash m ZZ$.\
+  We claim that $Theta_A$ is given by cup product with $a$, i.e. $Theta_A (alpha) = alpha smile a$ for any $alpha in hat(H)^q (G,A)$.\
+  For any $alpha in hat(H)^q (G,A)$, we have
+  $
+    alpha smile a &= alpha smile (delta compose delta (1)) \
+    &= (-1)^q delta (alpha smile delta (1)) \
+    &= delta ( delta (alpha smile 1)) \
+    &= delta compose delta (alpha)\
+    &= Theta_A (alpha)
+  $
+  where the connecting homomorphisms are given by the short exact sequences given by above exact sequences of $G$-modules.\
+]
+
+#lemma[
+  $G$: finite group. $A,B$: $G$-modules.\
+  Let $f$ be an inhomogeneous $1$-cocycle of $G$ with values in $B$.\
+  Let $a in A$ be an element with $N_G (a) = 0$.\
+  Then $f$, $a$ represent elements in $hat(H)^1 (G,B)$ and $hat(H)^(-1) (G,A)$ respectively.\
+  Then the cup product $f smile a$ is represented by the inhomogeneous $0$-cocycle
+  $
+    c = - sum_(sigma in G) (sigma dot a) times.o f(sigma)
+  $
+]
+
+#proof[
+  Consider the exact sequence of $G$-modules
+  $
+    #diagram(
+      $
+        0 edge(->) & ZZ edge(->) & ZZ[G] edge(->, rho) & J_G edge(->) & 0
+      $
+    )
+  $
+  tensoring with $B$, since
+  $
+    iota_*: hat(H)^1 (G,B) -> hat(H)^1 (G, ZZ[G] times.o B) = 0
+  $
+  we know that there is a $beta in ZZ[G] times.o B$ s.t. $f(sigma) = attach(beta, tl: sigma) - beta$.\
+  Also, $rho compose f (sigma) = 0$ for any $sigma in G$.\
+  By the construction in snake lemma, we know that $f = delta (rho(beta))$.\
+  Then
+  $
+    a smile f &= a smile delta (rho(beta)) \
+    &= (-1)^(-1) delta (a smile rho(beta)) \
+  $
+  The connecting homomorphism here is given by the norm map between exact sequences of $G$-modules.\
+  So we have
+  $
+    a smile f &= - delta (a smile rho(beta)) \
+    &= - N_G (a times.o beta) \
+    &= - sum_(sigma in G) (sigma dot a) times.o attach(beta, tl: sigma) \
+    &= - sum_(sigma in G) (sigma dot a) times.o f(sigma) - sum_(sigma in G) (sigma dot a) times.o beta\
+    &= - sum_(sigma in G) (sigma dot a) times.o f(sigma)
+  $
+  #remark[
+    The cup product with a $0$-cocycle is given by tensor product.
+  ]  
+]
