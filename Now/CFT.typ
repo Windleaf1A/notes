@@ -790,7 +790,7 @@ Other cases are defined in the textbook. It is a long but straightforward comput
     )
   $
   So we have $Theta_ZZ: hat(H)^q (G,ZZ) tilde.equiv hat(H)^(q+2) (G, ZZ)$.\
-  Similarly, tensoring above exact sequence (which splits as a sequence of abelian groups) with $A$, note that $I_G times.o A = I_G (A)$, which has vanishing Tate cohomology, we have $Theta_A: hat(H)^q (G,A) tilde.equiv hat(H)^(q+2) (G, A)$ for any $G$-module $A$.\
+  Similarly, tensoring above exact sequence (which splits as a sequence of abelian groups) with $A$, note that $ZZ[G] times.o A = I_G (A)$, which has vanishing Tate cohomology, we have $Theta_A: hat(H)^q (G,A) tilde.equiv hat(H)^(q+2) (G, A)$ for any $G$-module $A$.\
 
   Now, we have $hat(H)^0 (G,ZZ) = ZZ slash m ZZ$. Using the isomorphism between $hat(H)^0 (G,ZZ)$ and $hat(H)^2 (G,ZZ)$, there is an element $a in hat(H)^2 (G,ZZ)$ corresponding to $1 in ZZ slash m ZZ$.\
   We claim that $Theta_A$ is given by cup product with $a$, i.e. $Theta_A (alpha) = alpha smile a$ for any $alpha in hat(H)^q (G,A)$.\
@@ -810,7 +810,7 @@ Other cases are defined in the textbook. It is a long but straightforward comput
   Let $f$ be an inhomogeneous $1$-cocycle of $G$ with values in $B$.\
   Let $a in A$ be an element with $N_G (a) = 0$.\
   Then $f$, $a$ represent elements in $hat(H)^1 (G,B)$ and $hat(H)^(-1) (G,A)$ respectively.\
-  Then the cup product $f smile a$ is represented by the inhomogeneous $0$-cocycle
+  Then the cup product $a smile f$ is represented by the inhomogeneous $0$-cocycle
   $
     c = - sum_(sigma in G) (sigma dot a) times.o f(sigma)
   $
