@@ -973,7 +973,23 @@ Other cases are defined in the textbook. It is a long but straightforward comput
     )
   $
   Note that $phi^(-1)$ is an element in $op("Hom")_G (A^G, V)$. So there is a $psi in op("Hom")_G (A,V)$ s.t. $psi |_(A^G) = phi^(-1)$.\
-  Then $(ker psi)^G$ is a submodule of $A^G = 0$, so $ker psi = 0$. So $psi$ is injective.\
+  Consider the exact sequence of $G$-modules
+  $
+    #diagram(
+      $
+        0 edge(->) & ker psi edge(->) & A edge(->, psi) & V
+      $
+    )
+  $
+  applying the functor $(-)^G$, we get
+  $
+    #diagram(
+      $
+        0 edge(->) & (ker psi)^G edge(->) & A^G edge(->, psi) & V^G
+      $
+    )
+  $
+  Hence $(ker psi)^G = 0$. By lemma 1, we have $ker psi = 0$. So $psi$ is injective.\
   Consider the exact sequence of $G$-modules
   $
     #diagram(
@@ -1014,7 +1030,7 @@ Other cases are defined in the textbook. It is a long but straightforward comput
   As $F$ is free, we have $R$ is a free $ZZ$-module.\
   Then
   $
-    hat(H)^(i+1) (G_p, R) tilde.equiv hat(H)^(i+2) (G_p, R) = 0
+    hat(H)^(i+1) (G_p, R) = hat(H)^(i+2) (G_p, R) = 0
   $
   Also, if $R$ is cohomologically trivial, then $A$ is cohomologically trivial. So we can replace $A$ by $R$.\
   Now we assume that $A$ is a free $ZZ$-module.\
