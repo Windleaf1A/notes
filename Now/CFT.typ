@@ -1196,3 +1196,112 @@ To use dimension shifting, we will use the following two exact sequences of $G$-
 #proof[
   Let $B = ZZ$, $C = A$ and $n_p = -1$.
 ]
+
+= Cohomology for profinite groups
+From now on, $G$ is a profinite group.\
+For a $G$-module $A$, equip $A$ with the discrete topology.\
+We say that $G$ acts continuously on $A$ if $G times A -> A$ is continuous.\
+Equivalently, for any $a in A$, the stabilizer $G_a$ is an open subgroup of $G$.\
+In this case, we say that $A$ is a discrete $G$-module.\
+Denote $C_G$ the category of discrete $G$-modules.\
+
+Suppose that $A$ is a discrete $G$-module which is finitely generated as an abelian group. Then
+$
+  {g in G : g dot a = a forall a in A}
+$
+is an open normal subgroup of $G$. So the action of $G$ on $A$ factors through a finite quotient of $G$.\
+
+#example[
+  $
+    mu_n = {z in k^s : z^n = 1}
+  $
+  (need $gcd(n, op("char")(k)) = 1$) is a discrete $G_k$-module.\
+]
+
+#question[
+  How to define the cohomology groups for profinite groups?
+]
+We can't use $ZZ[G]$ here since it is not a discrete $G$-module.\
+In fact, $C_G$ does not have enough projective objects.\
+On the other hand, $C_G$ has enough injective objects.\
+So we can define the cohomology groups for profinite groups by the right derived functors of the left exact functor $A |-> A^G$.\
+
+#remark[
+  $C_G$ has enough injective objects.\
+]
+#proof[
+  We can use the Frobenius reciprocity for profinite groups.\
+  In fact, the smooth induction functor is the smoothing of the induction functor for finite groups.\
+  Since smoothing functor $"Mod"_G -> C_G$ is left exact and $op("Hom")(V, W) = op("Hom")(V, W^oo)$ if $V$ is smooth, we have smoothing functor preserves injective objects.\
+]
+
+In the following, we will define the cohomology groups for profinite groups using continuous cochains.\
+
+#definition[
+  Let $G$ be a profinite group and $A$ be a discrete $G$-module.\
+  For any $n >= 0$, we define
+  $
+    C^n (G,A) = {f: G^n -> A : f "is continuous"}
+  $
+  with the convention that $C^0 (G,A) = A$.\
+  Define the differential
+  $
+    d^n: C^n (G,A) -> C^(n+1) (G,A)
+  $
+  by
+  $
+    d^n f (g_1, ..., g_(n+1)) = g_1 dot f(g_2, ..., g_(n+1)) + sum_(i=1)^n (-1)^i f(g_1, ..., g_i g_(i+1), ..., g_(n+1)) + (-1)^(n+1) f(g_1, ..., g_n)
+  $
+]
+
+#proposition[
+  Let $Lambda$ be a filtered index set.\
+  Let $(G_lambda)_(lambda in Lambda)$ be a projective system of profinite groups.\
+  Let $(A_lambda)_(lambda in Lambda)$ be a inductive system of discrete $G_lambda$-modules.\
+  Define
+  $
+    G = projlim_(lambda in Lambda) G_lambda
+  $
+  and
+  $
+    A = injlim_(lambda in Lambda) A_lambda
+  $
+  Then for any $n >= 0$, we have
+  $
+    H^n (G,A) tilde.equiv injlim_(lambda in Lambda) H^n (G_lambda, A_lambda)
+  $
+]
+
+#proof[
+  First, $G$ is profinite and $A$ is a discrete $G$-module.\
+  #underline("Fact"): taking inductive limit with filtered index set is exact.\
+  We know that the cohomology is given by the following two exact sequences of complexes:
+  $
+    #diagram(
+      $
+        0 edge(->) & Z^bullet edge(->) & C^bullet edge(->) & B[+1]^bullet edge(->) & 0
+      $
+    )
+  $
+    and
+  $
+    #diagram(
+      $
+        0 edge(->) & B^bullet edge(->) & Z^bullet edge(->) & H^bullet edge(->) & 0
+      $
+    )
+  $
+  So it suffices to show that
+  $
+    C^n (G,A) tilde.equiv injlim_(lambda in Lambda) C^n (G_lambda, A_lambda)
+  $
+  For any $f in C^n (G,A)$, since $G^n$ is compact and $A$ is discrete, the image of $f$ is finite.\
+  So the image of $f$ is contained in some $A_lambda$.\
+  So there are finitely many open sets $V_i$ of $G^n$ s.t. $f$ is constant on each $V_i$.\
+  Since $G^n$ is compact, we may take each $V_i$ to be of the form $V_i = product_(j=1)^n U_j$, where each $U_j$ is an open set of $G$ of the form $U_j = pi_k^(-1) (W_k)$ for some $k in Lambda$ and some open set $W_k$ of $G_k$.\
+  Then we can find a $lambda_0 in Lambda$ s.t. $f$ factors through $G_(lambda_0)^n$.\
+  We need to show that $f$ can extend to a continuous map $G_(lambda_0)^n -> A_(lambda_0)$.\
+  Since $pi_lambda_0 (G)$ is closed in $G_lambda_0$, by exercise, we have a continuous section $s: G_lambda_0 slash pi_lambda_0 (G)-> G_lambda_0$, which gives us a homeomorphism $G_lambda_0 slash pi_lambda_0 (G) times pi_lambda_0 tilde.equiv G_lambda_0$.\
+  We already know that $f$ can be regarded as a continuous map $pi_lambda_0 (G)^n -> A_(lambda_0)$.\
+  So we can extend $f$ to a continuous map $G_lambda_0^n -> A_(lambda_0)$ by composing with the projection $G_lambda_0^n -> pi_lambda_0 (G)^n$.\
+]
