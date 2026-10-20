@@ -1215,14 +1215,14 @@ is an open normal subgroup of $G$. So the action of $G$ on $A$ factors through a
   $
     mu_n = {z in k^s : z^n = 1}
   $
-  (need $gcd(n, op("char")(k)) = 1$) is a discrete $G_k$-module.\
+  is a discrete $G_k$-module.\
 ]
 
 #question[
   How to define the cohomology groups for profinite groups?
 ]
 We can't use $ZZ[G]$ here since it is not a discrete $G$-module.\
-In fact, $C_G$ does not have enough projective objects.\
+In fact, if $|G|$ is infinite, $C_G$ does not have enough projective objects.\
 On the other hand, $C_G$ has enough injective objects.\
 So we can define the cohomology groups for profinite groups by the right derived functors of the left exact functor $A |-> A^G$.\
 
@@ -1232,7 +1232,7 @@ So we can define the cohomology groups for profinite groups by the right derived
 #proof[
   We can use the Frobenius reciprocity for profinite groups.\
   In fact, the smooth induction functor is the smoothing of the induction functor for finite groups.\
-  Since smoothing functor $"Mod"_G -> C_G$ is left exact and $op("Hom")(V, W) = op("Hom")(V, W^oo)$ if $V$ is smooth, we have smoothing functor preserves injective objects.\
+  Since smoothing functor $"Mod"_G -> C_G$ is left exact and $op("Hom")_G (V, W) = op("Hom")_C_G (V, W^oo)$ if $V$ is smooth, we have smoothing functor preserves injective objects.\
 ]
 
 In the following, we will define the cohomology groups for profinite groups using continuous cochains.\
@@ -1258,6 +1258,7 @@ In the following, we will define the cohomology groups for profinite groups usin
   Let $Lambda$ be a filtered index set.\
   Let $(G_lambda)_(lambda in Lambda)$ be a projective system of profinite groups.\
   Let $(A_lambda)_(lambda in Lambda)$ be a inductive system of discrete $G_lambda$-modules.\
+  Suppose that the action of $G_lambda$ on $A_lambda$ is compatible with the transition maps.\
   Define
   $
     G = projlim_(lambda in Lambda) G_lambda
@@ -1301,7 +1302,7 @@ In the following, we will define the cohomology groups for profinite groups usin
   Since $G^n$ is compact, we may take each $V_i$ to be of the form $V_i = product_(j=1)^n U_j$, where each $U_j$ is an open set of $G$ of the form $U_j = pi_k^(-1) (W_k)$ for some $k in Lambda$ and some open set $W_k$ of $G_k$.\
   Then we can find a $lambda_0 in Lambda$ s.t. $f$ factors through $G_(lambda_0)^n$.\
   We need to show that $f$ can extend to a continuous map $G_(lambda_0)^n -> A_(lambda_0)$.\
-  Since $pi_lambda_0 (G)$ is closed in $G_lambda_0$, by exercise, we have a continuous section $s: G_lambda_0 slash pi_lambda_0 (G)-> G_lambda_0$, which gives us a homeomorphism $G_lambda_0 slash pi_lambda_0 (G) times pi_lambda_0 tilde.equiv G_lambda_0$.\
+  Since $pi_lambda_0 (G)$ is closed in $G_lambda_0$, by exercise, we have a continuous section $s: G_lambda_0 slash pi_lambda_0 (G)-> G_lambda_0$, which gives us a homeomorphism $G_lambda_0 slash pi_lambda_0 (G) times pi_lambda_0 (G) tilde.equiv G_lambda_0$.\
   We already know that $f$ can be regarded as a continuous map $pi_lambda_0 (G)^n -> A_(lambda_0)$.\
   So we can extend $f$ to a continuous map $G_lambda_0^n -> A_(lambda_0)$ by composing with the projection $G_lambda_0^n -> pi_lambda_0 (G)^n$.\
 ]
