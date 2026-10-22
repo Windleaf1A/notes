@@ -1306,3 +1306,106 @@ In the following, we will define the cohomology groups for profinite groups usin
   We already know that $f$ can be regarded as a continuous map $pi_lambda_0 (G)^n -> A_(lambda_0)$.\
   So we can extend $f$ to a continuous map $G_lambda_0^n -> A_(lambda_0)$ by composing with the projection $G_lambda_0^n -> pi_lambda_0 (G)^n$.\
 ]
+
+== 1022
+continue the proof of the previous proposition.\
+The rest part is to show that the map
+$
+  injlim_(lambda in Lambda) C^n (G_lambda, A_lambda) -> C^n (G,A)
+$
+is injective.\
+Each $C^n (G_lambda, A_lambda) -> C^n (G,A)$ is given by $f |-> iota_lambda compose f compose pi_lambda^n$ where $pi_lambda: G -> G_lambda$ and $iota_lambda: A_lambda -> A$ are given by the projective and inductive systems.\
+We need to show that if $f in C^n (G_lambda, A_lambda)$ is such that $iota_lambda compose f compose pi_lambda^n = 0$, then there exists a $lambda' >= lambda$ s.t. $f$ factors through $G_(lambda')^n$ and the induced map $G_(lambda')^n -> A_(lambda')$ is zero.\
+Since $f$ is continuous, the image of $f$ is finite. So there is a $lambda_1 >= lambda$ the following diagram commutes:
+$
+  #diagram(
+    $
+      G^n edge(->, "b", pi_lambda^n) edge(->, "br", pi^n_lambda_1)\
+      G_lambda^n edge(->, "b", op(f)) & G_lambda_1 edge(->, "l", pi_(lambda lambda_1)) edge(->,"b", f_lambda_1)\
+      A_lambda edge(->, iota_(lambda lambda_1)) edge(->, "b", iota_lambda) & A_lambda_1 edge(->, "bl", iota_(lambda_1),#left) \
+      A
+    $
+  )
+$
+with $G^n -> A_lambda_1$ is already zero.\
+Now, for $i >= lambda_1$, define $E_i = {x in G_i^n: f_lambda_1 compose pi_(lambda_1 i)(x) != 0}$.\
+Then ${E_j}$ is a projective system.\
+As $f$ only take finitely many values, each $E_i$ is a finite union of clopen sets, hence $E_i$ is compact.\
+If each $E_i$ is nonempty, since the projective limit of nonempty T2 compact spaces is nonempty, we have $projlim_(i >= lambda_1) E_i != emptyset$, which is a contradiction.\
+So there is a $lambda' >= lambda_1$ s.t. $E_(lambda') = emptyset$, which means that $f_lambda' = 0$.
+
+
+#corollary[
+  Let $G$ be a profinite group and $A$ be a discrete $G$-module.\
+  Then
+  $
+    G = projlim_(U lt.closed G: "open") G slash U
+  $
+  and
+  $
+    A = injlim_(U lt.closed G: "open") A^U
+  $
+  So
+  $
+    H^n (G,A) tilde.equiv injlim_(U lt.closed G: "open") H^n (G slash U, A^U)
+  $
+    which is an inductive limit of finite group cohomology groups.
+]
+
+#remark[
++ $H <= G$: closed subgroup. Then we have the restriction map
+  $
+    op("Res"): H^n (G,A) -> H^n (H,A)
+  $
+  which is compatible with the restriction map for finite groups.\
++ For corestriction, since the original coinduced module is not discrete, we need a new proof of the restriction of injective modules in $C_G$ in $C_H$ is injective.\
+  Also, the 0-degree corestriction is defined by summing over the cosets of $H$ in $G$.\
+  So we need $H$ to be open in $G$ to make sure that the sum is finite.\
++ Induced modules are defined before which works well for profinite groups.\
++ The cohomology groups defined above is right derived functors of the left exact functor $A |-> A^G$.\
+  We need to show that $H^0 (G,A) = A^G$ and $H^n (G,-)$ is effaceable.\
+  So we only need to show that $H^n (G, I)$ is zero for all injective modules $I$ and $n>=1$.\
+  By the proposition above, we have
+  $
+    H^n (G,I) tilde.equiv injlim_(U lt.closed G: "open") H^n (G slash U, I^U)
+  $
+  We claim that $I^U$ is an injective $G slash U$-module. (and then we are done)\
+  From the adjunction
+  $
+    op("Hom")_G (M, I) tilde.equiv op("Hom")_(G slash U)(M, I^U)
+  $
+  We have the desired result.
+]
+
+#exercise[
+  We have seen that if $I$ is an injective $G$-module, then $I^U$ is an injective $G slash U$-module.\
+  In fact, the converse is also true. If $I^U$ is an injective $G slash U$-module for all open normal subgroups $U <= G$, then $I$ is an injective $G$-module.
+]
+
+#proposition[
+  If $I$ is injective in $C_G$, then $I$ is injective in $C_H$ for any closed subgroup $H <= G$.
+]
+
+#proof[
+  It suffices to show that $I^V$ is injective for any open normal subgroup $V <= H$.\
+  Let $V$ be an open normal subgroup of $H$.\
+  For $U inter H <= V$, we have $I^U$ is injective in $C_(G slash U)$.\
+  Then
+  $
+    H slash U inter H <= G slash U
+  $
+  So $I^U$ is injective in $C_(H slash U inter H)$.\
+  Consider $U V$, which is an open normal subgroup of $G$.\
+  Then
+  $
+    I^V = injlim_(U: "open normal subgroup of G") I^(U V)
+  $
+  So we only need to show that $I^(U V)$ is injective in $C_(H slash V)$ by the following exercise.\
+  
+]
+
+#exercise[
+  Let $R$ be a ring which is left Noetherian. Let ${M_i}$ be a filtered inductive system of injective $R$-modules. Then $injlim_i M_i$ is an injective $R$-module.
+
+  Hint: Use Baer's criterion.
+]
