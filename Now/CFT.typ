@@ -1400,9 +1400,12 @@ So there is a $lambda' >= lambda_1$ s.t. $E_(lambda') = emptyset$, which means t
   $
     I^V = injlim_(U: "open normal subgroup of G") I^(U V)
   $
-  So we only need to show that $I^(U V)$ is injective in $C_(H slash V)$ by the following exercise.\
-  We have $I^(U V)$ is injective in $C_(G slash U V)$.\
-  Also, $G slash U V >= H slash (U V inter H) = H slash V$.\
+  So by the following exercise, we only need to show that $I^(U V)$ is injective in $C_(H slash V)$.\
+  Since
+  $
+    I^(U V) = (I^U)^(V slash (U inter H))
+  $
+  and $I^U$ is injective in $C_(H slash (U inter H))$, we have $I^(U V)$ is injective in $C_(H slash (U inter H))$, hence in $C_(H slash V)$.
   So we are done.
 ]
 
