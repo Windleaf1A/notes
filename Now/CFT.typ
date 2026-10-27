@@ -1413,3 +1413,234 @@ So there is a $lambda' >= lambda_1$ s.t. $E_(lambda') = emptyset$, which means t
 
   Hint: Use Baer's criterion.
 ]
+
+= First notions of Galois cohomology
+Let $k$ be a field and $k^s$ be a separable closure of $k$. Denote $Gamma_k = op("Gal")(k^s/k)$.\
+Now, for any $k_1$: any field extension of $k$ (may not be algebraic), and $k_1^s$ a separable closure of $k_1$.\
+Then there are embeddings $k^s -> k_1^s$ extending the embedding $k -> k_1$.\
+Fix a such embedding $j$, we have a restriction map
+$
+  Gamma_k_1 & -> & Gamma_k\
+  sigma & |-> & j^(-1) compose sigma compose j
+$
+For different choices of embeddings, since the image of the embedding is the separable closure of $k$ in $k_1^s$, the image of the restriction map is the same.\
+So for different choices of embeddings, the embeddings differ by an element in $Gamma_k$.\
+In this case, the restriction map differs by an inner automorphism of $Gamma_k$.\
+We have known that the map of cohomology groups induced by an inner automorphism is the identity map.\
+So we have a well-defined restriction map of cohomology groups
+$
+  op("Res"): H^n (Gamma_k, A) -> H^n (Gamma_k_1, A)
+$
+In particular, if $k_1 = k$, then there's a canonical isomorphism
+$
+  H^n (Gamma_k, A) tilde.equiv H^n (Gamma_k_1, A)
+$
+In this sense, we don't need to fix a separable closure of $k$ to define the Galois cohomology groups.\
+So we denote
+$
+  H^n (k,A) := H^n (Gamma_k, A)
+$
+
+#example[
+  $X$ is a commutative algebraic group scheme over $k$.\
+  Then $A = X(k^s)$ is a discrete $Gamma_k$-module.
+
+  What is an algebraic scheme and its points?\
+  Not precisely (if $X$ is affine), $X$ is given by a finitely generated $k$-algebra. Say $k[x_1,...,x_n]/I$.\
+  Then a point in it is a tuple $(a_1,...,a_n)$ s.t. $f(a_1,...,a_n) = 0$ for all $f in I$.\
+  It has a 1-1 correspondence with the $k$-algebra homomorphisms $k[x_1,...,x_n]/I -> k^s$ which is given by $x_i |-> a_i$.\
+  So $X(k^s) = op("Hom")_(k-"alg")(k[x_1,...,x_n]/I, k^s)$.\
+
+  In this case, we can show that $X(k^s)$ is a discrete set:\
+  Let $(a_1,...,a_n)$ be a point in $X(k^s)$. Then there is a finite Galois extension $L slash k$ s.t. $a_1,...,a_n in L$.\
+  Then $op("Gal")(k^s slash L)$ is an open subgroup of $Gamma_k$ which fixes $(a_1,...,a_n)$.\
+]
+
+
+#proposition[
+  Let $L slash k$ be a finite Galois extension and $G = op("Gal")(L slash k)$. Then $hat(H)^n (G,L) = 0$.
+]
+#proof[
+  #fact(caption:"Normal basis theorem")[
+    There is an element $a in L$ s.t. ${sigma(a)}_(sigma in G)$ is a $k$-basis of $L$.
+  ]
+  So
+  $
+    L tilde.equiv ZZ[G] times.o_ZZ k
+  $
+  So $hat(H)^n (G,L) = 0$.
+]
+
+#proposition[
+  $
+    H^n (k, k^s) = 0
+  $
+]
+#proof[
+  For any finite Galois extension $L slash k$, we have $hat(H)^n (op("Gal")(L slash k), L) = 0$.\
+  $
+    H^n (k, k^s) tilde.equiv injlim_(L: "finite Galois extension of" k) H^n (op("Gal")(L slash k), L) tilde.equiv injlim_(L: "finite Galois extension of" k) 0 tilde.equiv 0
+  $
+]
+
+#proposition[
+  Let $k$ be a field of characteristic $p > 0$.\
+  Define a map $phi: k^s -> k^s$ by $phi(x) = x^p - x$. Then $phi$ is a group homomorphism of $(k^s, +)$.\
+  Then
+  $
+    H^n (k, ZZ slash p ZZ) = k slash phi(k)
+  $
+]
+#proof[
+  Since $phi'(x) = -1$, we have $phi$ is surjective.\
+  The kernel of $phi$ is $FF_p$.\
+  So there is an exact sequence of $Gamma_k$-modules
+  $
+    #diagram(
+      $
+        0 edge(->) & FF_p edge(->) & k^s edge(->, phi) & k^s edge(->) & 0
+      $
+    )
+  $
+  which induces a long exact sequence of cohomology groups
+  $
+    #diagram(
+      $
+        (k^s)^(Gamma_k) edge(->, phi) & (k^s)^(Gamma_k) edge(->) & H^1 (k, FF_p) edge(->) & H^1 (k, k^s) = 0
+      $
+    )
+  $
+  By Galois theory, we have $(k^s)^(Gamma_k) = k$. So we have
+  $
+    H^1 (k, FF_p) tilde.equiv k slash phi(k).
+  $
+]
+
+== Non-abelian cohomology
+#definition[
+  Let $Gamma$ be a profinite group.\
+  If $E$ is a discrete set, we can define degree 0 cohomology group
+  $
+    H^0 (Gamma, E) = {x in E: sigma dot x = x forall sigma in Gamma}
+  $
+  If $E$ is a discrete group, we can define degree 1 cohomology group
+  $
+    H^1 (Gamma, E) = Z^1 (Gamma, E) slash tilde
+  $
+  where $Z^1 (Gamma, E)$ is the set of continuous maps $f: Gamma -> E$ s.t. $f(sigma tau) = f(sigma) dot attach(f(tau), tl: sigma)$ for all $sigma, tau in Gamma$.\
+  Two maps $f, g: Gamma -> E$ are equivalent if there is an $alpha in E$ s.t.
+  $
+    g(sigma) = alpha^(-1) dot f(sigma) dot attach(alpha, tl: sigma)
+  $
+  for all $sigma in Gamma$.\
+  Here $H^1 (Gamma, E)$ is not necessarily a group, but it is a pointed set with the distinguished point $[1]$. We call $[1]$ the neutral element of $H^1 (Gamma, E)$.\
+  Then $(H^1 (Gamma, E), [1])$ is a pointed set.
+]
+
+#definition[
+  The category of pointed set consists of the following data:
+  - Objects: $(X, x_0)$ where $X$ is a set and $x_0 in X$ is a distinguished point.\
+  - Morphisms: $f: (X, x_0) -> (Y, y_0)$ is a map $f: X -> Y$ s.t. $f(x_0) = y_0$.
+  - Composition: $g compose f: (X, x_0) -> (Z, z_0)$ is given by $g compose f: X -> Z$.
+
+  We say
+  $
+    (X, x_0) -> (Y, y_0) -> (Z, z_0)
+  $
+  is exact if $f(X) = g^(-1)(z_0)$.
+]
+
+#fact[
+  Let $A$ be a discrete $Gamma$-group and $B <= A$ be a $Gamma$-subgroup. Then we have an exact sequence of pointed sets
+  $
+    #diagram(
+      $
+        1 edge(->) & B^(Gamma) edge(->) & A^(Gamma) edge(->) & (A slash B)^(Gamma) edge(->, op(delta)) & H^1 (Gamma, B) edge(->) & H^1 (Gamma, A)
+      $
+    )
+  $
+    where the connecting map $delta$ is given by:\
+    Let $overline(a) in (A slash B)^Gamma$. Then $sigma |-> attach(a, tl:sigma) a^(-1)$ is a 1-cocycle of $B$.\
+
+  Suppose that moreover $B$ is a normal subgroup of $A$. Then we have an exact sequence of pointed sets
+  $
+    #diagram(
+      $
+        H^1 (Gamma, B) edge(->) & H^1 (Gamma, A) edge(->) & H^1 (Gamma, A slash B)
+      $
+    )
+  $
+  
+  Suppose that moreover $B$ is abelian. Then we have an exact sequence of pointed sets
+  $
+    #diagram(
+      $
+        H^1 (Gamma, A) edge(->) & H^1 (Gamma, A slash B) edge(->, op(delta)) & H^2 (Gamma, B)
+      $
+    )
+  $
+]
+
+== $k$-forms
+Let $V_0$ be a vector space over $k$ with additional structure. (e.g. $k$-algebra)\
+Consider all $k$-vector spaces $V$ with the same additional structure.\
+Our goal is to classify all such $V$ up to isomorphism which is isomorphic to $V_0$ over $k^s$.\
+
+#definition[
+  A finite dimensional central simple algebra over $k$ is a finite dimensional $k$-algebra $A$ s.t. $Z(A) = k$ and $A$ has no nontrivial two-sided ideals.\
+]
+
+#fact[
+  Let $A$ be a finite dimensional central simple algebra over $k$. Then there is a unique integer $n >= 1$ and a unique (up to isomorphism) central division algebra $D$ over $k$ s.t. $A tilde.equiv M_n (D)$.
+]
+
+#fact[
+  CSA is closed under base change.
+]
+#fact[
+  If $k$ is algebraically closed, then the only finite dimensional central division algebra over $k$ is $k$ itself.\
+  So by Wedderburn's theorem, the only finite dimensional central simple algebra over $k$ is $M_n (k)$ for some $n >= 1$.\
+  So for general $k$, all CSA over $k$ are isomorphic in $overline(k)$.\
+  In fact, it is true that all CSA over $k$ are isomorphic in $k^s$.
+]
+
+#example[
+  $HH$ is the quaternion algebra over $RR$. Then $HH$ is a finite dimensional central simple algebra over $RR$.\
+  Then
+  $
+    HH times.o_RR CC tilde.equiv M_2 (CC)
+  $
+  by Wedderburn's theorem.\
+  The isomorphism is given by
+  $
+    1 & |-> & mat(1,0;0,1)\
+    i & |-> & mat(i,0;0,-i)\
+    j & |-> & mat(0,1;-1,0)\
+    k & |-> & mat(0,i;i,0)
+  $
+]
+
+#definition[
+  Let $V_0$ be a vector space over $k$ with additional structure. (e.g. $k$-algebra)\
+  A $k$-form of $V_0$ is a vector space $V$ over $k$ with the same additional structure s.t. there is an isomorphism
+  $
+    f: V times.o_k k^s tilde.equiv V_0 times.o_k k^s
+  $
+]
+
+Suppose $V$ is a $k$-form of $V_0$. (We suppose that they are finite dimensional over $k$)\
+By definition, there is an isomorphism $f: V times.o_k k^s tilde.equiv V_0 times.o_k k^s$.\
+For any $sigma in Gamma_k$, we have an isomorphism
+$
+  V times.o_k k^s overset(1 times.o sigma, -->) V times.o_k k^s
+$
+Then we can define an action of $Gamma_k$ on $V times.o_k k^s$ by
+$
+  f compose (1 times.o sigma) compose f^(-1): V_0 times.o_k k^s -> V_0 times.o_k k^s
+$
+Compairing with the original action of $Gamma_k$ on $V_0 times.o_k k^s$, we have an automorphism
+$
+  phi(sigma) = f compose (1 times.o sigma) compose f^(-1) compose (1 times.o sigma^(-1)): V_0 times.o_k k^s -> V_0 times.o_k k^s
+$
+It is easy to check that it is a 1-cocycle of $Gamma_k$ with values in $op("Aut")(V_0 times.o_k k^s)$.\
+If we choose another isomorphism $f': V times.o_k k^s tilde.equiv V_0 times.o_k k^s$, we can show that the corresponding 1-cocycle $phi'$ is equivalent to $phi$.\
