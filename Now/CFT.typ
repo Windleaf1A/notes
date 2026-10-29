@@ -1644,3 +1644,163 @@ $
 $
 It is easy to check that it is a 1-cocycle of $Gamma_k$ with values in $op("Aut")(V_0 times.o_k k^s)$.\
 If we choose another isomorphism $f': V times.o_k k^s tilde.equiv V_0 times.o_k k^s$, we can show that the corresponding 1-cocycle $phi'$ is equivalent to $phi$.\
+
+#fact[
+  There is a 1-1 correspondence between the set of isomorphism classes of $k$-forms of $V_0$ and the pointed set $H^1 (Gamma_k, op("Aut")(V_0 times.o_k k^s))$.
+
+  The converse is given by the following construction:\
+  Given a 1-cocycle, we can define a new action of $Gamma_k$ on $V_0 times.o_k k^s$ by
+  $
+    sigma dot v = phi(sigma) (1 times.o sigma)(v)
+  $
+  Then define $V$ to be the set of $Gamma_k$-invariant elements of $V_0 times.o_k k^s$.\
+  Then $V$ is a $k$-form of $V_0$.
+
+  This trick is known as Galois descent.\
+  In general, if $W$ is a $k^s$-vector space with continuous action of $Gamma_k$ which is semilinear i.e.
+  $
+    sigma(c w) = sigma(c) attach(w, tl:sigma)
+  $
+  Then
+  $
+    W^(Gamma_k) times.o_k k^s tilde.equiv W
+  $
+]
+
+#example[
+  $
+    H^1 (k, op("GL")(n, k^s)) = 1
+  $
+  In particular,
+  $
+    H^1 (k, (k^s)^times) = 1
+  $
+]
+
+#example[
+  $
+    H^1 (k, op("O")_n)
+  $
+  classifies all nondegenerate quadratic forms over $k$ of rank $n$ up to isomorphism.\
+]
+
+#question[
+  Given a $Gamma_k$-group $G$, is there an object $V_0$ over $k$ with additional structure s.t.
+  $
+    G = op("Aut")(V_0 times.o_k k^s)
+  $
+
+  The answer is yes.
+]
+
+
+#fact[
++ A CSA of dimension $n^2$ are $k$-forms of $M_n (k)$.\
++ 
+  $
+    op("Aut")(M_n (k^s)) = op("PGL")_n (k^s)
+  $
+
+Combining the above theory, we have a 1-1 correspondence between the set of isomorphism classes of CSA of dimension $n^2$ over $k$ and the pointed set
+  $
+    H^1 (Gamma_k, op("PGL")_n (k^s))
+  $
+]
+
+== Central simple algebras and the Brauer group
+For two CSA $A,B$, $A times.o_k B$ is also a CSA.\
+We say that $A$ and $B$ are equivalent if there are integers $m,n >= 1$ s.t.
+$
+  A times.o_k M_m (k) tilde.equiv B times.o_k M_n (k)
+$
+or equivalently, if the corresponding central division algebras are isomorphic.\
+So it is an equivalence relation which is compatible with the multiplication of CSA.\
+Denote $op("Br")(k)$ for the set of equivalence classes of CSA over $k$.\
+It is a group with the multiplication given by $[A] [B] = [A times.o_k B]$ and the inverse given by $[A]^(-1) = [A^"op"]$.\
+The identity element is given by $[k]$.
+
+We have a natural map
+$
+  iota: op("PGL")((k^s)^n) times op("PGL")((k^s)^m) -> op("PGL")((k^s)^n times.o (k^s)^m) tilde.equiv op("PGL")((k^s)^(n m))
+$
+So we have
+$
+  H^1 (k, op("PGL")_n (k^s)) times H^1 (k, op("PGL")_m (k^s)) -> H^1 (k, op("PGL")_(n m) (k^s))
+$
+Also, we have
+$
+  iota(M_1, M_2) = iota(M_1, I_m) iota(I_n, M_2) = iota(I_n, M_2) iota(M_1, I_m)
+$
+Consider
+$
+  iota(-, I_m): op("PGL")_n (k^s) -> op("PGL")_(n m) (k^s)
+$
+By Wedderburn's theorem, we have this map is injective.\
+
+#definition[
+  $
+    H^1 (k, op("PGL")_oo) = injlim_n H^1 (k, op("PGL")_n (k^s))
+  $
+  where the partial order on $NN$ is given by divisibility. The transition map is given by $iota(-, I_m)$ which is injective.
+]
+
+Consider the short exact sequence
+$
+  #diagram(
+    $
+      1 edge(->) & (k^s)^times edge(->) & op("GL")_n (k^s) edge(->) & op("PGL")_n (k^s) edge(->) & 1
+    $
+  )
+$
+It induces a long exact sequence of pointed sets
+$
+  #diagram(
+    $
+      H^1 (k, op("GL")_n (k^s)) edge(->) & H^1 (k, op("PGL")_n (k^s)) edge(->, op(delta)) & H^2 (k, (k^s)^times)
+    $
+  )
+$
+By Hilbert 90, we have $H^1 (k, op("GL")_n (k^s)) = 1$. So we have an injective map
+$
+  delta: H^1 (k, op("PGL")_n (k^s)) -> H^2 (k, (k^s)^times)
+$
+By the naturality of the long exact sequence, we have the following commutative diagram
+$
+  #diagram(
+    $
+      H^1 (k, op("PGL")_n (k^s)) edge(->, delta) edge(->, "b", iota(-, I_m)) & H^2 (k, (k^s)^times) edge("=", "b")\
+      H^1 (k, op("PGL")_(n m) (k^s)) edge(->, delta) & H^2 (k, (k^s)^times)
+    $
+  )
+$
+So we have an injective map
+$
+  H^1 (k, op("PGL")_oo) -> H^2 (k, (k^s)^times)
+$
+The key point is that
+$
+  iota(M_1, I_m), iota(I_n, M_2)
+$
+commute in $H^1 (k, op("PGL")_(n m) (k^s))$. So in fact the above map is a group homomorphism.\
+
+In fact, the above map is an isomorphism.
+
+So in usual sense, we define the Brauer group of $k$ to be
+$
+  op("Br")(k) = H^2 (k, (k^s)^times)
+$
+
+== Another application of Hilbert 90
+#corollary[
+  Consider the exact sequence of $Gamma_k$-modules
+  $
+    #diagram(
+      $
+        1 edge(->) & mu_n edge(->) & (k^s)^times edge(->, "b", (-)^n) & (k^s)^times edge(->) & 1
+      $
+    )
+  $
+  The results are:
+  - $H^1 (k, mu_n) = k^times slash (k^times)^n$
+  - $H^2 (k, mu_n) = op("Br")(k)[n]$
+]
