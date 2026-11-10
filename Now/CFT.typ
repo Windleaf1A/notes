@@ -2019,3 +2019,236 @@ So there is a 1-1 correspondence between $(L, sigma)$ and surjective homomorphis
     \# hat(H)^0 (G, L^times) = [L:K]
   $
 ]
+
+#proposition[
+  $K$: local field. $L slash K$: unramified finite Galois extension with Galois group $G$. Then $U_L$ and $U_L^(1)$ are cohomologically trivial $G$-modules.
+]
+#proof[
+  Since $L slash K$ is unramified, $pi_K$ is a uniformizer of $cal(O)_L$ and $G tilde.equiv op("Gal")(kappa_L slash kappa_K)$.\
+  Moreover, it is compatible with the isomorphism
+  $
+    U_L^(i) slash U_L^(i+1) & tilde.equiv kappa_L\
+    v & |-> pi_K^(-i) (v - 1)
+  $
+  This is a $G$-module isomorphism under the identification $G tilde.equiv op("Gal")(kappa_L slash kappa_K)$.\
+  So $U_L^(i) slash U_L^(i+1)$ is cohomologically trivial.\
+  Then we can write $U_L^(1)$ as a projective limit of finite cohomologically trivial $G$-modules.\
+  Therefore $U_L^(1)$ is cohomologically trivial.\
+  Then we have an exact sequence
+  $
+    #diagram(
+      $
+        1 edge(->) & U_L^(1) edge(->) & U_L edge(->) & kappa_L^times edge(->) & 1
+      $
+    )
+  $
+  in the category of $G$-modules.\
+  By Hilbert 90, we have $hat(H)^1 (G, kappa_L^(times)) = 0$.\
+  Since $H^2 (G, kappa_L^times)$ characterizes the Brauer group of $kappa_K$, and $kappa_K$ is finite, we have $H^2 (G, kappa_L^times) = 0$.\
+  Since $G$ is cyclic, we have $kappa_L^(times)$ is cohomologically trivial.\
+  So $U_L$ is cohomologically trivial.
+]
+
+
+Let $K_"nr"$ be the unramified closure of $K$ in $K^s$.\
+Then there is a valuation $v: K_"nr" -> ZZ$ which extends the valuation of $K$.\
+Then we have an exact sequence of $Gamma_K$-modules
+$
+  #diagram(
+    $
+      1 edge(->) & U_"nr" edge(->) & K_"nr"^times edge(->, v) & ZZ edge(->) & 1
+    $
+  )
+$
+(note that Galois action does not change the valuation).\
+Denote $Gamma_K^("nr")$ for the Galois group of $K_"nr" slash K$.\
+There is another important exact sequence of $Gamma_K$-modules
+$
+  #diagram(
+    $
+      0 edge(->) & ZZ edge(->) & QQ edge(->) & QQ slash ZZ edge(->) & 0
+    $
+  )
+$
+The exact sequences give us the following isomorphism:
+$
+  #diagram(
+    $
+      H^(2)(Gamma_K^("nr"), K_"nr"^(times)) edge(->, v) & H^(2)(Gamma_K^("nr"), ZZ) edge(->, "r", delta^(-1)) & H^(1)(Gamma_K^("nr"), QQ slash ZZ) edge(->) & QQ slash ZZ
+    $
+  )
+$
+Note that $Gamma_K^("nr") tilde.equiv op("Gal")(kappa_K^s  slash kappa_K) tilde.equiv hat(Z)$ canonically given by the Frobenius automorphism.\
+The last map above is given by the evaluation of a character of $Gamma_K^("nr")$ at the Frobenius automorphism.\
+The whole composition gives us an isomorphism
+$
+  op("inv")_K: H^(2)(Gamma_K^("nr"), K_"nr"^(times)) tilde.equiv QQ slash ZZ
+$
+This isomorphism is called the invariant map of $K$.
+
+#remark[
+Suppose $K subset L subset K^s$ be Galois extensions.\
+We have a map
+$
+  op("Br")(K) = H^2 (Gamma_K, (K^s)^times) -> H^2 (Gamma_L, (K^s)^times) = op("Br")(L)
+$
+given by restriction.\
+By Hilbert 90 and inflation-restriction exact sequence, we have
+$
+  #diagram(
+    $
+      0 edge(->) & H^2 (op("Gal")(L slash K), L^times) edge(->) & H^2 (Gamma_K, (K^s)^times) edge(->) & H^2 (Gamma_L, (K^s)^times)
+    $
+  )
+$
+Denote $op("Br")(L slash K)$ to be the kernel of the restriction map. In this case, we have
+$
+  op("Br")(L slash K) tilde.equiv H^2 (op("Gal")(L slash K), L^times)
+$
+]
+
+#proposition[
+  Let $L subset K^s$ be a finite Galois extension of $K$.\
+  Then we have a commutative diagram
+  $
+    #diagram(
+      $
+        H^2 (Gamma_K^("nr"), K_"nr"^(times)) edge(->,"r", op("inv")_K) edge(->, "b", op("res")) & QQ slash ZZ edge(->, "b", times [L:K]) \
+        H^2 (Gamma_L^("nr"), L_"nr"^(times)) edge(->, "r", op("inv")_L) & QQ slash ZZ
+      $
+    )
+  $
+  where the restriction map here is given by the natural maps between the objects.
+]
+#proof[
+Tracing the follow commutative diagram:
+$
+  #diagram(
+    $
+      H^2 (Gamma_K^("nr"), K_"nr"^(times)) edge(->, "r", v_K) edge(->, "b") & H^2 (Gamma_K^("nr"), ZZ) edge(->, "r", delta^(-1)) edge(->, "b") & H^1 (Gamma_K^("nr"), QQ slash ZZ) edge(->) edge(->, "b") & QQ slash ZZ edge(->, "b", times f)\
+      H^2 (Gamma_L^("nr"), K_"nr"^(times)) edge(->, "r", v_K) edge(->, "b") & H^2 (Gamma_L^("nr"), ZZ) edge(->, "r", delta^(-1)) edge(->, "b", times e) & H^1 (Gamma_L^("nr"), QQ slash ZZ) edge(->) edge(->, "b", times e) & QQ slash ZZ edge(->, "b", times e)\
+      H^2 (Gamma_L^("nr"), L_"nr"^(times)) edge(->, "r", v_L) & H^2 (Gamma_L^("nr"), ZZ) edge(->, "r", delta^(-1)) & H^1 (Gamma_L^("nr"), QQ slash ZZ) edge(->) & QQ slash ZZ
+    $
+  )
+$
+]
+
+#lemma[
+  Let $K subset L subset K^s$ be a finite Galois extension. Set $G subset op("Gal")(L slash K)$. Then $H^2 (G,L^(times))$ is finite and its cardinality divides $[L:K]$.
+]
+
+#theorem[
+  Let $K$ be a local field. Then
+  $
+    op("Br")(K) tilde.equiv op("Br")(K_"nr" slash K)
+  $
+]
+
+#lemma[
+  Let $L slash K$ be a finite Galois extension, $G = op("Gal")(L slash K)$, $n = [L:K]$.\
+  Let $K_n subset K_"nr"$ be the unramified extension of $K$ of degree $n$.\
+  Then $H^(2)(G, L^(times))$ and $H^(2)(op("Gal")(K_n slash K), K_n^(times))$ have the same image in $op("Br")(K)$.\
+  (Note that Hilbert 90 tells us they embed into $op("Br")(K)$ injectively.)
+]
+#proof[
+  Consider the commutative diagram:
+  $
+    #diagram(
+      $
+        0 edge(->) & op("Br")(L slash K) edge(->) & op("Br")(K) edge(->) & op("Br")(L)\
+        0 edge(->) & H^(2)(C_n, K_n^(times)) edge(->) & H^(2)(Gamma_K^"nr", (K_"nr")^times) edge(->, "b", op("inv")_K) edge(->,op("res")) edge(arrow.r.hook,"t") & H^2 (Gamma_L^"nr", (L_"nr")^times) edge(->, "b", op("inv")_L) edge(arrow.r.hook, "t")\
+        && QQ slash ZZ edge(->, times n) & QQ slash ZZ
+      $
+    )
+  $
+  with the first row exact.\
+  Now, by proposition, we have $\# H^(2)(C_n, K_n^(times)) = n$, so the image of $H^(2)(C_n, K_n^(times))$ in $H^(2)(Gamma_L^"nr", (L_"nr")^(times))$ is $0$, which means that the image of $H^(2)(C_n, K_n^(times))$ in $op("Br")(K)$ is contained in $op("Br")(L slash K)$.\
+  By lemma, we have $\# H^(2)(C_n, K_n^(times)) = n$ and $\# H^(2)(G, L^(times))$ divides $n$.\
+  So the image of $H^(2)(G, L^(times))$ in $op("Br")(K)$ is same as the image of $H^(2)(C_n, K_n^(times))$ in $op("Br")(K)$.
+]
+
+#proof[ (proof of theorem)
+  $
+    op("Br")(K) &= injlim_(K subset L subset K^s) op("Br")(L slash K) \
+    &= injlim_(K subset K_n subset K_"nr") op("Br")(K_n slash K) \
+    &= op("Br")(K_"nr" slash K)
+  $
+]
+
+#theorem[
+  $K$: local field. Then we have an isomorphism 
+  $
+    op("inv")_K : op("Br")(K) tilde.equiv QQ slash ZZ
+  $
+  If $L$ is a finite extension of $K$, then restriction map $op("Br")(K) -> op("Br")(L)$ is given by multiplication by $[L:K]$ on $QQ slash ZZ$.\
+  If furthermore, $L slash K$ is separable, then the corestriction map corresponds to identity on $QQ slash ZZ$.
+]
+#proof[
+  By restriction-corestriction formula, we have the desired result.\
+]
+
+#corollary[
+  Using the same notations as in the theorem. $L slash K$ is finite, not necessarily separable.\
+  Let $alpha in op("Br")(K)$. Then:
+  + $op("res")_L (alpha) = 0$ iff $[L:K] alpha = 0$.
+  + $L slash K$: finite Galois. Then image of $H^(2) (G, L^(times)) subset op("Br")(K) tilde.equiv QQ slash ZZ$ is $1/n ZZ slash ZZ$, where $n = [L:K]$.
+]
+
+#corollary[
+  $
+    op("Br")(K_"nr") = 0
+  $
+]
+
+Now, because we have a canonical choice of generator of $op("Gal")(K_n slash K)$, we can define a canonical character of $Gamma_K$ of order $n$ which corresponds to the cyclic extension $K_n slash K$.\
+So we can define a cyclic algebra
+$
+  A = (chi, pi_K)
+$
+for any uniformizer $pi_K$ of $K$.\
+Then we have
+$
+  #diagram(
+    $
+      1 edge(->) & ZZ edge(->, "r", n) edge(->, "b", pi_K) & ZZ edge(->,"r") edge(->, "b", F(pi_K), #left) & ZZ slash n ZZ edge(->) edge(->, "b") & 1\
+      1 edge(->) & K^times edge(->) & op("GL")_n (K_n^(times)) edge(->) & op("PGL")_n (K_n^(times)) edge(->) & 1
+    $
+  )
+$
+where $F(pi_K): 1 |-> y in (chi, pi_K)$.\
+Then it induces the following commutative diagram:
+$
+  #diagram(
+    $
+      chi member("b")\
+      H^1 (G, ZZ slash n ZZ) edge(->) edge(->,"b", overline(F(pi_K))_*) & H^2 (G, ZZ) edge(->, "b", smile pi_K)\
+      H^1 (G, op("PGL")) edge(->, op("delta")) & H^2 (G, K_n^(times))
+    $
+  )
+$
+Then $delta chi smile pi_K = delta (overline(F(pi_K))_* chi) = (chi, pi_K)$.\
+In the invariant map:
+$
+  #diagram(
+    $
+      H^2 (Gamma_K^("nr"), K_"nr"^(times)) edge(->, op(nu_K)) & H^(2)(Gamma_K^("nr"), ZZ) edge(->, delta^(-1)) & H^1 (Gamma_K^("nr"), QQ slash ZZ) edge(->) & QQ slash ZZ
+    $
+  )
+$
+This gives us the image of $(chi, pi_K)$ in $QQ slash ZZ$ is $1/n$, which is the canonical generator of $1/n ZZ slash ZZ$.\
+i.e. the Brauer group of a local field is generated by cyclic algebras of the form $(chi, pi_K)$.
+
+Now, by Tate-Nakayama Theorem
+#eye(supplement:"recall")[
+  Let $G$ be a finite group and $A$ be a $G$-module.\
+  Suppose that there is an element $u in H^2 (G, A)$ s.t. for any subgroup $H subset G$, $H^1 (H, A) = 0$ and $H^2 (H, A)$ is generated by the restriction of $u$ and is of cardinality $|H|$.\
+  Then cup product with $u$ gives an isomorphism
+  $
+    H^r (G, ZZ) tilde.equiv H^(r+2) (G, A)
+  $
+  for any integer $r$.
+]
+Now, take $K$ be a local field and $L slash K$ be a finite Galois extension with Galois group $G$.\
+$A = L^(times)$.\
+Then $H^1 (H, A) = 0$ is Hilbert 90.\
+$H^2 (H, A)$ is by above theory.
