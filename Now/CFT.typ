@@ -2369,3 +2369,144 @@ $
   theta_K: K^(times) -> Gamma_K^("ab")
 $
 which is of dense image.\
+
+
+#proposition[
+  Let $K$ be a local field. $K subset E subset K^(s)$. $E slash K$ is finite.\
+  Then we have a natural inclusion $Gamma_E = op("Gal")(K^(s) slash E) arrow.r.hook op("Gamma")(K^(s) slash K) = Gamma_K$.\
+  + We have a commutative diagram
+    $
+      #diagram(
+        $
+          E^(times) edge(->, "r", omega_E) edge(->, "b", N_(E slash K)) & Gamma_E^("ab") edge(arrow.r.hook, "b")\
+          K^(times) edge(->, "r", omega_K) & Gamma_K^("ab")
+        $
+      )
+    $
+  + Let $L$ be the maximal abelian extension of $K$ in $E$. Then the image of $N_(E slash K)$ is same as the image of $N_(L slash K)$.\
+]
+#proof[
+  + It suffices to show that for any finite Galois over $K$, $K subset E subset F subset K^(s)$, the following diagram commutes:
+    $
+      #diagram(
+        $
+          E^(times) slash N_(F slash E)(F^(times)) edge(->, "r", omega_(F slash E)) edge(->, "b", N_(E slash K)) & op("Gal")(F slash E)^("ab") edge(arrow.r.hook, "b")\
+          K^(times) slash N_(F slash K)(F^(times)) edge(->, "r", omega_(F slash K)) & op("Gal")(F slash K)^("ab")
+        $
+      )
+    $
+    Here the norm map $N_(E slash K)$ is exactly the correstriction map
+    $
+      hat(H)^(0)(op("Gal")(F slash E), F^(times)) -> hat(H)^(0)(op("Gal")(F slash K), F^(times))
+    $
+    The inverse of the reciprocity map is given by cup product with the fundamental class $u_(F slash K)$.\
+    Also, the right vertical map is also the corestriction map.\
+    Since cup product is compatible with corestriction, we have the desired commutative diagram. (projection formula)
+  + By transitivity, we have $N_(E slash K)(E^(times)) subset N_(L slash K)(L^(times))$.\
+    Take $F$ to be the Galois closure of $E$ over $K$.\
+    Let $G$ be the Galois group of $F slash K$ and $H$ be the Galois group of $F slash L$.\
+    By the above corollary, we have the following commutative diagram:
+    $
+      #diagram(
+        $
+          K^(times) slash N_(F slash K)(L^(times)) edge(->, "r", omega_(F slash K)) edge(arrow.r.twohead, "b") & G^("ab") edge(arrow.r.twohead, "b")\
+          K^(times) slash N_(L slash K)(L^(times)) edge(->, "r", omega_(L slash K)) & op("Gal")(L slash K)^("ab")
+        $
+      )
+    $
+    Now, for $a in K^(times) slash N_(F slash K)(F^(times))$, suppose $overline(a)$ is $1$ in $K^(times) slash N_(L slash K)(L^(times))$.\$
+    By the diagram, we have $omega_(F slash K)(overline(a)) in op("Gal")(F slash L)^("ab")$.\
+    Let $G' = [G,G]$ and $F' = F^(G')$, which is the maximal abelian extennsion of $K$ in $F$.\
+    So $L = E inter F'$. (By Galois Theory)\
+    At the same time, $G' H = op("Gal")(F slash L)$.\
+    So the image of $H^("ab")$ in $G^("ab")$ is same as the image of $op("Gal")(F slash L)^("ab")$ in $G^("ab")$, which is same as the kernel of the map $G^("ab") -> op("Gal")(L slash K)^("ab")$.\
+    By above, we have the following commutative diagram:
+    $
+      E^(times) slash N_(F slash E)(F^(times)) edge(->, "r", omega_(F slash E)) edge(->, "b", N_(E slash K)) & H^("ab") edge(->, "b")\
+      K^(times) slash N_(F slash K)(F^(times)) edge(->, "r", omega_(F slash K)) edge(arrow.r.twohead, "b") & G^("ab") edge(arrow.r.twohead, "b")\
+      K^(times) slash N_(L slash K)(L^(times)) edge(->, "r", omega_(L slash K)) & op("Gal")(L slash K)^("ab")
+    $
+    We have that the right vertical sequence is exact.\
+    So for an element in $N_(L slash K)(L^(times))$, it is $1$ in $K^(times) slash N_(L slash K)(L^(times))$.\
+    Then it is in the image of $N_(E slash K)$ since the left vertical sequence is exact.\
+]
+
+#lemma[
+  $K$: local field.
+  + For $k subset K' subset K^(s)$ with $K' slash K$ unramifed, we have:\
+    $forall x in K^(times)$, $omega_(K' slash K)(x) = op("Frob")_K^(nu_K (x))$
+  + $omega_K (cal(O)_K^(times)) = I_K^("ab"), I_K = op("Gal")(K^(s) slash K_"nr")$
+]
+#proof[
+  + Let $chi$ be the canonical character $chi: op("Gal")(K' slash K) -> 1/n ZZ slash ZZ$.\
+    Then
+    $
+      chi(omega_(K' slash K)(x)) = op("inv")_K (overline(x) smile delta(chi)) = nu_K (x) / n
+    $
+    (check for $x in cal(O)_(K')^(times)$ and $x = pi_K$)
+  + For any $L slash K$ finite abelian, $K subset L subset K^(s)$, $G = op("Gal")(L slash K)$.\
+    Take $K'$ to be the maximal unramified extension of $K$ in $L$.\
+    Then we have a commutative diagram
+    $
+      #diagram(
+        $
+          K^(times) slash N_(L slash K)(L^(times)) edge(->, "r", omega_(L slash K)) edge(arrow.r.twohead, "b") & G edge(arrow.r.twohead, "b")\
+          K^(times) slash N_(K' slash K)(K'^(times)) edge(->, "r", omega_(K' slash K)) & op("Gal")(K' slash K)
+        $
+      )
+    $
+    For $a in cal(O)_K^(times)$, we have $omega_(K' slash K)(a) = 1$ by the first part.\
+    So $omega_K (a) in I_K^("ab")$.\
+    Conversely, if $sigma in I$, then there is a finite abelian extension $L slash K$ and $a in K^(times)$ s.t. $omega_(L slash K)(a) = sigma$.\
+    So $omega_(K' slash K)(a) = op("id")$. By the first part, we have $nu_K (a)$ is a multiple of $n = [K':K]$.\
+    Note that
+    $
+      nu_K N_(L slash K)(L^(times)) &= [L:K] nu_L (L^(times))\
+      &= e f 1/e ZZ \
+      &= f ZZ
+      &= [K':K] ZZ
+    $
+    So $omega_K (cal(O)_K^(times)) = I_K^("ab")$.
+]
+
+#lemma[
+  $K$: local field.\
+  + Suppose that $U$ is an open subgroup of $K^(times)$ of finite index. Assume that $K subset L subset K^(s)$ is a finite abelian extension s.t. $U supset N_(L slash K)(L^(times))$.\
+    Then there is a subextension $K subset F subset L$ s.t. $F slash K$ is Galois and $U = N_(F slash K)(F^(times))$.\
+  + Suppose that $K subset L_i subset K^(s)$ be two finite abelian extensions. If $N_(L_1 slash K)(L_1^(times)) = N_(L_2 slash K)(L_2^(times))$, then $L_1 = L_2$.
+  + Let $K subset F subset K^(s)$ be a finite abelian extension. Then $N_(F slash K)(F^(times))$ is an open subgroup of $K^(times)$ of finite index.
+These are saying that we have a one-to-one correspondence between finite abelian extensions of $K$ and open subgroups of $K^(times)$ of finite index.
+]
+#proof[
+  + We have the reciprocity map:
+    $
+      #diagram(
+        $
+          K^(times) slash N_(L slash K)(L^(times)) edge(->, "r", omega_(L slash K)) edge(arrow.r.twohead, "b") & G^("ab") edge(arrow.r.twohead, "b")\
+          K^(times) slash N_(F slash K)(F^(times)) edge(->, "r", omega_(F slash K)) & op("Gal")(F slash K)^("ab")
+        $
+      )
+    $
+    where $F$ is given by the following:\
+    $omega_(L slash K)(U)$ is a subgroup $H$ of $G^("ab")$.\
+    Take $F$ to be the fixed field of $H$ in $L$. Then $F slash K$ is Galois and $U = N_(F slash K)(F^(times))$.\
+  + Let $M = L_1 L_2$. Then $M slash K$ is finite abelian.\
+    Then
+    $
+      #diagram(
+        $
+          K^(times) slash N_(M slash K)(M^(times)) edge(->, "r", omega_(M slash K)) edge(arrow.r.twohead, "b") & op("Gal")(M slash K)^("ab") edge(arrow.r.twohead, "b", pi_i)\
+          K^(times) slash N_(L_i slash K)(L_i^(times)) edge(->, "r", omega_(L_i slash K)) & op("Gal")(L_i slash K)^("ab")
+        $
+      )
+    $
+    We want to show that $ker pi_1 = ker pi_2$.\
+    Equivalently, $N_(L_1 slash K)(L_1^(times)) = N_(L_2 slash K)(L_2^(times))$.
+  + By reciprocity map, we know that $N_(F slash K)(F^(times))$ is a subgroup of $K^(times)$ of finite index.\
+    To show that it is open, it suffices to show that it is closed.\
+    So it suffices to show that $N_(F slash K): F^(times) -> K^(times)$ is a closed map.\
+    Since it is continuous, it suffices to show that it is a proper map.\
+    In local field, a set is compact iff it is closed and bounded.\
+    Trivially taking preimage of $N_(F slash K)$ preserves these properties.\
+    So $N_(F slash K)$ is a proper map.\
+]
