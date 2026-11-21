@@ -2510,3 +2510,108 @@ These are saying that we have a one-to-one correspondence between finite abelian
     Trivially taking preimage of $N_(F slash K)$ preserves these properties.\
     So $N_(F slash K)$ is a proper map.\
 ]
+
+Now, if $k$ is a general field. Let $n$ be a positive integer not divisible by the characteristic of $k$.\
+Let $mu_n$ be the group of $n$-th roots of unity in $k^s$.\
+Then we have a non-canonical isomorphism
+$
+  mu_n tilde.equiv ZZ slash n ZZ
+$
+as abelian groups, but not as $Gamma_k$-modules in general.
+
+If $mu_n subset k$, then the above isomorphism is a $Gamma_k$-module isomorphism.\
+Then
+$
+  H^1 (Gamma_k, mu_n) tilde.equiv op("Hom")(Gamma_k, ZZ slash n ZZ)
+$
+Also, by Kummer seuqence and Hilbert 90, we have
+$
+  k^(times) slash k^(times)^n tilde.equiv H^1 (Gamma_k, mu_n)
+$
+This can be explicitly given by the following:\
+For $a in k^(times)$, we can define a character $chi_a: Gamma_k -> mu_n$ by $chi_a (sigma) = sigma(x) / x$ where $x^n = a$.\
+Then we get a pairing
+$
+  k^times slash (k^times)^n times k^times slash (k^times)^n & -> & op("Br")(k) = H^2 (Gamma_k, (k^s)^times) \
+  (a,b) & |-> & b smile delta(chi_a)
+$
+where $delta: H^1 (Gamma_k, ZZ slash n ZZ) -> H^2 (Gamma_k, ZZ)$ is the connecting homomorphism.
+
+#proposition[
+  With above assumptions, if furthermore $k$ is a local field, then the above pairing is non-degenerate in the sense that for any $a in k^times$, if $(a,b) = 0$ for all $b in k^times$, then $a in (k^times)^n$.
+]
+
+#proof[
+  Suppose $(a,b) = 0$ for all $b in k^times$.\
+  Since invariant map is an isomorphism, we have
+  $
+    op("inv")_k (b smile delta(chi_a)) = 0
+  $
+  for all $b in k^times$.\
+  So
+  $
+    chi_a (omega_k (b)) = 0
+  $
+  which means that $chi_a = 0$ i.e. $a in (k^times)^n$.
+]
+
+In fact, the Hilbert symbol is alternating, i.e. $(a,b) = -(b,a)$.\
+So it is indeed a non-degenerate pairing.\
+
+#theorem[
+  Let $K$ be a $p$-adic field. Suppose $U$ is a finite-index open subgroup of $K^(times)$.\
+  Then there is a unique finite abelian extension $L slash K$ s.t. $U = N_(L slash K)(L^(times))$.\
+]
+
+#proof[
+- Uniqueness: by above.
+- Existence: Let $n = [K^(times):U]$.\
+  Then $U supset (K^(times))^n$.\
+  By lemma, it suffices to show the case that $U = (K^(times))^n$.\
+  Suppose that $F$ is a finite abelian extension of $K$ s.t. $F supset K(mu_n)$.\
+  If the theorem holds for $F$, i.e.
+  $
+    (F^(times))^n supset N_(L slash F)(L^(times))
+  $
+  for some finite abelian extension $L slash F$.\
+  Take $L'$ to be the maximal abelian extension of $K$ in $L$. Then $L' slash K$ is finite abelian.\
+  Then we have
+  $
+    (K^(times))^n supset N_(F slash K) (F^(times)^n) supset N_(L slash K)(L^(times))
+  $
+  By some lemma above, we have $N_(L slash K)(L^(times)) = N_(L' slash K)(L'^(times))$.\
+  So we can take $L'$ to be the desired extension.\
+  So it suffices to show the case that $U = (K^(times))^n$ and $K supset mu_n$.\
+  Choose an isomorphism $mu_n tilde.equiv ZZ slash n ZZ$.\
+  Set $G = Gamma_k^("ab")$.\
+  By reciprocity map, it suffices to show that there is a finite quotient $G -> H$ s.t. the kernel of the map
+  $
+    K^(times) -> H
+  $
+  is exactly $(K^(times))^n$.\
+  Consider $G slash n G$: We know that
+  $
+    H^(1) (Gamma_k, mu_n) tilde.equiv op("Hom")_"cts" (G, ZZ slash n ZZ) tilde.equiv op("Hom")_"cts" (G slash n G, ZZ slash n ZZ)
+  $
+    since $ZZ slash n ZZ$ is $n$-torsion and abelian. Also
+  $
+    H^(1) (Gamma_k, mu_n) tilde.equiv k^(times) slash (k^(times))^n
+  $
+    which is finite by direct computation.
+
+  Since $G$ is compact, $n G$ is closed.\
+  Hence $G slash n G$ is profinite and abelian.\
+  By Pontryagin duality, we have
+  $
+    G slash n G tilde.equiv op("Hom")_"cts" ("finite", ZZ slash n ZZ)
+  $
+  which is finite.\
+  So $n G$ is open in $G$ and hence we can take $L = (k^s)^(n G)$.\
+  Clearly $(K^(times))^n$ is contained in kernel.\
+  If $alpha in ker$, then $(a, alpha) = 0$ for all $a in K^(times)$.\
+  Using the non-degeneracy of the Hilbert symbol, we have $alpha in (K^(times))^n$.\
+]
+
+#eye(supplement:"Fact")[
+$H$: profinite abelian. Then $(H^times)^times$ is profinite and naturally isomorphic to $H$.
+]
